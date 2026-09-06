@@ -79,21 +79,28 @@ def main() -> None:
     # Restrict to US-produced films so "domestic" (US & Canada box office) means
     # the film's HOME market. Non-US films (e.g. Chinese blockbusters) are excluded
     # here — for them US/Canada isn't home — and analysed separately.
+    # Take the top 15 US films by worldwide gross, then ORDER BY the split
+    # (foreign share) so the chart reads from most-lopsided-abroad to most balanced.
     ww = con.execute(
         """
-        WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us = TRUE)
-        SELECT w.title, w.release_year, w.domestic_gross, w.foreign_gross, w.worldwide_gross
-        FROM films_worldwide w JOIN us ON us.title=w.title AND us.release_year=w.release_year
-        ORDER BY w.worldwide_gross DESC LIMIT 15
+        WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us = TRUE),
+        top AS (
+            SELECT w.title, w.release_year, w.domestic_gross, w.foreign_gross, w.worldwide_gross,
+                   100.0*w.foreign_gross/w.worldwide_gross AS foreign_pct
+            FROM films_worldwide w JOIN us ON us.title=w.title AND us.release_year=w.release_year
+            ORDER BY w.worldwide_gross DESC LIMIT 15
+        )
+        SELECT * FROM top ORDER BY foreign_pct DESC
         """
     ).df()
     ww["label"] = ww["title"] + "  (" + ww["release_year"].astype(str) + ")"
+    ww["split_label"] = ww["foreign_pct"].apply(lambda p: f"{p:.0f}% abroad")
     img2 = lollipop(
         ww, category_col="label", value_col="foreign_gross", value2_col="domestic_gross",
-        label_col="worldwide_gross",  # ranked by worldwide total; label that so it reads as sorted
-        value_fmt=money_bil,
+        label_col="split_label",  # sorted by the split; label the foreign share
+        value_fmt=lambda v: v,    # split_label is already a string
         title="Hollywood's biggest films make most of their money abroad",
-        subtitle="Top 15 U.S.-produced films by worldwide gross (nominal $), highest first. Gold = home (U.S. & Canada), teal = rest of world; label = worldwide total.",
+        subtitle="Top 15 U.S.-produced films by worldwide gross, ordered by the split. Gold = home (U.S. & Canada), teal = rest of world; label = share earned abroad.",
         source="Box Office Mojo, Top Lifetime Grosses (Worldwide) + TMDB origin country — as of Sep 2026",
         dot_color="#005F73", dot2_color="#EE9B00",
         value_label="Rest of world", value2_label="Home (US/Canada)",
