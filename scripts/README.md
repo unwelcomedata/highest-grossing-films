@@ -7,13 +7,21 @@ scripts are the same logic in linear form, handy for a full rebuild.
 ## Run order
 
 ```bash
-python scripts/ingest.py        # fetch Box Office Mojo adjusted chart -> data/raw/ -> DuckDB (films_adjusted)
-python scripts/make_charts.py   # render the lollipop/dumbbell lead chart -> outputs/social/
+python scripts/ingest.py            # BOM adjusted-domestic chart  -> DuckDB (films_adjusted)
+python scripts/ingest_worldwide.py  # BOM worldwide chart          -> DuckDB (films_worldwide)
+python scripts/enrich_genres.py     # TMDB genre lookup per film    -> DuckDB (films_genre, film_genres_long)
+python scripts/make_charts.py       # render the 3 charts           -> outputs/social/
 ```
 
-`scripts/ingest.py` fetches the source (or reuses the cached raw HTML in
-`data/raw/`), cleans it in DuckDB, registers provenance in `_sources`, and saves
-interim Parquet. The export (CSV + codebook) is produced by `notebooks/03-prepare.ipynb`.
+- `ingest.py` / `ingest_worldwide.py` fetch each Box Office Mojo chart (or reuse
+  the cached raw HTML in `data/raw/`), clean in DuckDB, register provenance in
+  `_sources`, and save interim Parquet.
+- `enrich_genres.py` needs a TMDB v3 key in `.env` (`TMDB_API_KEY`, gitignored).
+  It looks up each film by title + year and caches responses in `data/raw/tmdb/`,
+  so re-runs are offline.
+- `make_charts.py` builds all three charts via the shared Pillow factory.
+- The exports (CSV + codebook for each of the three tables) are produced by
+  `notebooks/03-prepare.ipynb`.
 
 ## Notes
 

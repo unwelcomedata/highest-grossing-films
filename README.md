@@ -1,64 +1,93 @@
 **[@unwelcomedata](https://unwelcomedata.github.io/highest-grossing-films/)** · data from public sources
 
-# Hollywood's real box-office champions, once you adjust for inflation
+# "Highest-grossing" depends entirely on how you count
 
-The all-time domestic box-office chart is dominated by recent superhero films —
-but only because ticket prices keep rising. Adjust for **ticket-price inflation**
-and the board flips: a 1939 film still sits at #1, and the golden-age classics
-crowd the top ten.
+Ask which films are the biggest ever and you'll get three different answers
+depending on where and when you measure. This project lays the three lenses side
+by side — **domestic vs. worldwide**, **nominal vs. inflation-adjusted**, and
+**by genre** — because the disagreements between them are the interesting part.
 
-**The finding:** measured in 2022 dollars, **Gone with the Wind** (1939) is the
-biggest domestic release ever at about **$1.9 billion** — roughly **9×** its
-original $201M take. **Star Wars: A New Hope** (1977) and **The Sound of Music**
-(1965) follow. The films that lead the *nominal* chart (Force Awakens, Endgame)
-only appear once the adjustment is applied, and lower down.
+**The findings:**
+
+- **Most of the money is overseas.** For nearly every top film, the international
+  (rest-of-world) box office dwarfs the domestic (U.S. & Canada) take. *Avatar*
+  made $785M at home and **$2.1B** abroad. The extreme case: **Ne Zha 2** (2025)
+  grossed **$2.25B internationally on just $23M domestic** — a global blockbuster
+  almost nobody in the U.S. saw.
+- **Adjust for inflation and the "biggest domestic film" is from 1939.** Measured
+  in 2022 dollars, *Gone with the Wind* still tops the domestic chart (~$1.9B),
+  ahead of *Star Wars* (1977) — the modern hits only lead the *nominal* board.
+- **Story genres travel; spectacle skews home.** Among the top-200 worldwide
+  films, Crime, Drama, Thriller and Fantasy earn a *bigger* share of their money
+  abroad than at home, while — surprisingly — **Science Fiction skews the most
+  domestic**.
 
 ---
 
-## The chart
+## 1. Where the money comes from: overseas
 
-**Adjusted vs. nominal domestic gross — top 15.** Teal dot = inflation-adjusted
-gross (2022 $); gold dot = what the film actually made in its release years. The
-length of the connector is the inflation effect: long for the classics, short for
-recent films.
+Top 15 films by worldwide gross. Gold = domestic (U.S. & Canada), teal =
+international. The connector length is how lopsided each film is toward overseas.
 
-![Adjusted vs nominal domestic gross, top 15 films](docs/adjusted_vs_nominal_top_films.png)
+![Worldwide gross: domestic vs international](docs/02_worldwide_domestic_vs_international.png)
+
+## 2. Which genres travel?
+
+Each genre's share of *international* box office relative to its share of
+*domestic*, for the top-200 worldwide films. Right = over-indexes abroad; left =
+skews domestic. (Genres with 10+ films; see the method note on multi-genre films.)
+
+![Genres that skew international vs domestic](docs/03_genre_international_vs_domestic_index.png)
+
+## 3. The biggest *domestic* films, adjusted for inflation
+
+A different question entirely: within the U.S. & Canada, adjusted for ticket-price
+inflation, who sold the most tickets? Gold = nominal (release-year $), teal =
+adjusted to 2022 $.
+
+![Domestic gross, adjusted vs nominal](docs/01_domestic_adjusted_vs_nominal.png)
 
 ---
 
 ## How it was measured
 
-The ranking uses **ticket-price inflation**, not general (CPI) inflation. Each
-film's estimated lifetime tickets sold are multiplied by the 2022 average ticket
-price, so every figure is in 2022 dollars. That effectively ranks films by
-**how many people bought tickets** — the fairest cross-era comparison — rather
-than by nominal dollars, which always favor the present.
+- **Worldwide / domestic / international** grosses are **nominal** (year-of-release
+  dollars) from Box Office Mojo. Domestic = U.S. & Canada; international =
+  everywhere else. Nominal dollars favor recent films (higher prices, more
+  markets) — which is exactly why the adjusted domestic chart tells a different
+  story.
+- **The adjusted domestic chart** uses *ticket-price* inflation (estimated tickets
+  sold × the 2022 average ticket price), not CPI. It effectively ranks by tickets
+  sold. Classics' totals include decades of re-releases.
+- **Genre** comes from TMDB, matched by title + year. In the "which genres travel"
+  chart, each film's gross is attributed to *every* one of its genres, so grosses
+  double-count across genres; the metric is a **ratio** (international share ÷
+  domestic share), which stays valid under that attribution. The sample is
+  already-global blockbusters, so read it as "among big hits, which genres lean
+  which way."
 
-One honest caveat: a film's lifetime total includes its **re-releases**. Classics
-like *Gone with the Wind* and *Star Wars* were re-released theatrically several
-times, so their totals reflect decades of accumulated audience, not a single run.
-Full method, definitions, and caveats are in [SOURCES.md](SOURCES.md).
+Full per-source detail, definitions, and caveats are in [SOURCES.md](SOURCES.md).
 
 ---
 
 ## The data
 
-The published dataset is in [`export/`](export/):
+Published datasets are in [`export/`](export/):
 
-- `highest_grossing_films_v1.csv` — the top 200 films by adjusted domestic gross,
-  with nominal gross, estimated tickets, release year, decade, and the
-  inflation multiple.
-- `highest_grossing_films_v1_codebook.md` — a plain-English description of every
-  column.
+- `highest_grossing_films_v1.csv` — domestic, inflation-adjusted top 200 (adjusted
+  + nominal gross, tickets, year, inflation multiple).
+- `films_worldwide_v1.csv` — worldwide top 200 with domestic / international split.
+- `films_genre_v1.csv` — genre(s) per film (TMDB).
+
+Each ships with a `*_codebook.md` describing every column.
 
 ---
 
 ## Sources & license
 
-Box Office Mojo, *Top Lifetime Adjusted Grosses* (domestic, adjusted to 2022
-dollars). Full attribution, collection method, and caveats are in
-[SOURCES.md](SOURCES.md). Data © IMDb/Box Office Mojo, used for commentary and
-analysis. No crowd-edited sources are used.
+Box Office Mojo (domestic adjusted + worldwide) and TMDB (genres). Full
+attribution and caveats in [SOURCES.md](SOURCES.md). "This product uses the TMDB
+API but is not endorsed or certified by TMDB." No crowd-edited sources are used.
 
 ---
 

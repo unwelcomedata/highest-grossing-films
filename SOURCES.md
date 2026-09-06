@@ -71,3 +71,69 @@ derived summary figures in this project's export; the published dataset is a
 transformed analytical table, credited to the source above.
 
 **No crowd-edited sources (e.g. Wikipedia) are used.**
+
+---
+
+## Box Office Mojo — Top Lifetime Grosses (Worldwide)
+
+- **Publisher:** Box Office Mojo (IMDb / Amazon).
+- **URL:** https://www.boxofficemojo.com/chart/ww_top_lifetime_gross/
+- **Retrieved:** 2026-09-06
+- **Coverage:** Top 200 films by worldwide lifetime gross.
+- **Fields used:** rank, title, worldwide / domestic / foreign lifetime gross,
+  domestic %, foreign %, release year.
+
+### Collection method
+
+Studio-reported theatrical receipts. **Domestic = United States & Canada;
+foreign = everywhere else.** Lifetime totals include all theatrical runs
+(original + re-releases).
+
+### Definitions / caveats
+
+- **Nominal dollars.** These figures are *not* inflation-adjusted — they are in
+  year-of-release dollars. The worldwide board therefore favors recent, wide-
+  release films (more screens, higher prices, more international markets). This is
+  the opposite lens from the domestic *adjusted* chart, and the contrast is the
+  point of the project.
+- **Foreign totals are noisy for some films.** Currency conversion and reporting
+  completeness vary by market and era.
+- **China-heavy films** (e.g. *Ne Zha 2*, *The Battle at Lake Changjin*, *Wolf
+  Warrior 2*) can post enormous worldwide totals with near-zero domestic gross —
+  a real signal, not an error.
+
+---
+
+## TMDB (The Movie Database) — film genres
+
+- **Publisher:** TMDB, https://www.themoviedb.org/
+- **Retrieved:** 2026-09-06
+- **Use:** genre label(s) per film, matched by title + release year via the TMDB
+  search API. `primary_genre` is TMDB's first-listed genre; a film usually has
+  several (e.g. *Avatar* = Science Fiction, Action, Adventure).
+- **Match rate:** 321/321 films across both boards matched.
+
+### Method & caveats (genre analysis)
+
+- **Genres are TMDB's editorial tags**, applied by their contributor community —
+  a reasonable but not authoritative taxonomy.
+- **Multi-genre attribution.** In the "which genres travel" analysis, each film's
+  full domestic and foreign gross is attributed to *each* of its genres, so a
+  film like *Avatar* contributes to Sci-Fi, Action, and Adventure alike. Grosses
+  therefore **double-count across genre buckets**. The over/under-index metric is
+  a *ratio* (a genre's share of international gross ÷ its share of domestic gross),
+  so the double-counting affects numerator and denominator similarly and the
+  directional signal holds — but absolute per-genre dollar totals should not be
+  summed as if mutually exclusive.
+- **Sample is the top-200 *worldwide* films** — all already-global hits. The genre
+  index therefore says "*among blockbusters*, which genres lean international vs
+  domestic," not "which genres travel" in general.
+- **Small-genre noise.** The published genre chart is restricted to genres with
+  **10+ films**; sparse genres (e.g. Mystery, n≈6) are excluded because a couple
+  of films would swing the index.
+
+### Licensing / attribution
+
+"This product uses the TMDB API but is not endorsed or certified by TMDB." Genre
+metadata is used for non-commercial analysis with attribution. The TMDB API key is
+stored locally in a gitignored `.env` and is never committed.

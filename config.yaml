@@ -31,6 +31,22 @@ sources:
   #   Box Office Mojo adjusts by estimated tickets sold × the reference-year
   #   average ticket price — i.e. ticket-price inflation, NOT CPI. Domestic only.
 
+  # Box Office Mojo — Top Lifetime Grosses WORLDWIDE. Per film: worldwide,
+  # domestic, and foreign lifetime gross + domestic%/foreign% split. NOMINAL
+  # (year-of-release) dollars, not inflation-adjusted. Static-fetchable.
+  bom_worldwide:
+    url: "https://www.boxofficemojo.com/chart/ww_top_lifetime_gross/"
+    type: html_table
+    table_index: 0
+    js_render: false
+
+  # TMDB — genre enrichment (looked up per film by title + year).
+  # Requires a free API key in .env: TMDB_API_KEY (v3) or TMDB_READ_TOKEN (v4).
+  # Not a config URL source; queried via src/ingest genre helper.
+  tmdb:
+    api_base: "https://api.themoviedb.org/3"
+    # key/token read from environment (.env), never committed.
+
 export:
   formats:
     - csv

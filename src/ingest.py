@@ -304,3 +304,108 @@ def ingest_source(
         return parse_html_scrape(html, row_selector, field_map)
 
     raise ValueError(f"Unknown source type '{source_type}'. Use: html_table, html_scrape, csv, json.")
+
+
+# ---------------------------------------------------------------------------
+# Environment / secrets (.env) — no python-dotenv dependency
+# ---------------------------------------------------------------------------
+
+def load_env(env_path: str | Path = ".env") -> dict[str, str]:
+    """Load KEY=VALUE lines from a .env file into os.environ and return them.
+
+    Ignores blank lines and comments. Does not overwrite already-set vars.
+    Never logs values. The .env file is gitignored — keys stay local.
+    """
+    import os
+    env: dict[str, str] = {}
+    p = Path(env_path)
+    if not p.exists():
+        return env
+    for line in p.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        k, v = k.strip(), v.strip()
+        env[k] = v
+        os.environ.setdefault(k, v)
+    return env
+
+
+# ---------------------------------------------------------------------------
+# TMDB genre enrichment (cached + rate-limited)
+# ---------------------------------------------------------------------------
+
+_TMDB_BASE = "https://api.themoviedb.org/3"
+_tmdb_genre_map: dict[int, str] | None = None
+
+
+def _tmdb_cache_dir(cfg: dict) -> Path:
+    d = Path(cfg["paths"]["data_raw"]) / "tmdb"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+def tmdb_genre_map(api_key: str) -> dict[int, str]:
+    """Return TMDB's genre id -> name mapping (fetched once, memoized)."""
+    global _tmdb_genre_map
+    if _tmdb_genre_map is None:
+        resp = requests.get(
+            f"{_TMDB_BASE}/genre/movie/list",
+            params={"api_key": api_key}, timeout=20,
+        )
+        resp.raise_for_status()
+        _tmdb_genre_map = {g["id"]: g["name"] for g in resp.json()["genres"]}
+    return _tmdb_genre_map
+
+
+def _safe_slug(title: str, year: int | None) -> str:
+    import re
+    s = re.sub(r"[^A-Za-z0-9]+", "_", title).strip("_").lower()
+    return f"{s}_{year or 'na'}"
+
+
+def tmdb_lookup_movie(
+    title: str,
+    year: int | None,
+    api_key: str,
+    cfg: dict,
+    rate_limit_seconds: float = 0.3,
+) -> dict[str, Any]:
+    """Look up a single film on TMDB by title (+year), with local JSON caching.
+
+    Returns a dict: {title, year, tmdb_id, tmdb_title, genres (list[str]),
+    primary_genre, matched (bool)}. Cached under data/raw/tmdb/ so re-runs are
+    offline and don't re-hit the API.
+    """
+    cache_path = _tmdb_cache_dir(cfg) / f"{_safe_slug(title, year)}.json"
+    if cache_path.exists():
+        return json.loads(cache_path.read_text(encoding="utf-8"))
+
+    time.sleep(rate_limit_seconds)  # polite
+    params = {"api_key": api_key, "query": title}
+    if year:
+        params["year"] = year
+    resp = requests.get(f"{_TMDB_BASE}/search/movie", params=params, timeout=20)
+    resp.raise_for_status()
+    results = resp.json().get("results", [])
+
+    gmap = tmdb_genre_map(api_key)
+    if results:
+        top = results[0]
+        genres = [gmap.get(i) for i in top.get("genre_ids", []) if gmap.get(i)]
+        rec = {
+            "title": title, "year": year,
+            "tmdb_id": top.get("id"),
+            "tmdb_title": top.get("title"),
+            "genres": genres,
+            "primary_genre": genres[0] if genres else None,
+            "matched": True,
+        }
+    else:
+        rec = {
+            "title": title, "year": year, "tmdb_id": None, "tmdb_title": None,
+            "genres": [], "primary_genre": None, "matched": False,
+        }
+    cache_path.write_text(json.dumps(rec), encoding="utf-8")
+    return rec
