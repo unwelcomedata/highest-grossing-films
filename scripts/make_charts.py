@@ -19,8 +19,9 @@ WORKSPACE = PROJECT.parent.parent
 sys.path.insert(0, str(PROJECT))
 sys.path.insert(0, str(WORKSPACE / "shared"))
 
+import duckdb  # noqa: E402
+
 from src.ingest import load_config  # noqa: E402
-from src.clean_quality import get_connection  # noqa: E402
 from chart_templates import lollipop, diverging_bars  # noqa: E402
 from viz import PRESETS  # noqa: E402
 
@@ -39,7 +40,18 @@ def _display(img):
 
 def main() -> None:
     cfg = load_config(str(PROJECT / "config.yaml"))
-    con = get_connection(cfg)
+    db_file = cfg["settings"]["duckdb_file"]
+    # This script only reads. Try read-only; if a notebook kernel holds a
+    # read-write lock (DuckDB is single-writer), fall back to a throwaway copy so
+    # chart rendering never contends with an open notebook.
+    try:
+        con = duckdb.connect(db_file, read_only=True)
+    except duckdb.IOException:
+        import shutil, tempfile
+        tmp = Path(tempfile.gettempdir()) / "hgf_charts_readcopy.duckdb"
+        shutil.copy(db_file, tmp)
+        print(f"(primary DB locked — reading from copy {tmp})")
+        con = duckdb.connect(str(tmp), read_only=True)
     img_w, img_h, _ = PRESETS["twitter_landscape"]
     out = Path(cfg["paths"]["outputs_social"])
     out.mkdir(parents=True, exist_ok=True)
@@ -54,7 +66,7 @@ def main() -> None:
         dom, category_col="label", value_col="adjusted_gross", value2_col="nominal_gross",
         value_fmt=money_bil,
         title="The biggest DOMESTIC films of all time, adjusted for inflation",
-        subtitle="U.S. & Canada box office only. Teal = adjusted to 2022 $, gold = nominal (release $). Domestic figures — see the worldwide view for the fuller picture.",
+        subtitle="U.S. & Canada only. Teal = adjusted to 2022 $, gold = nominal (release $) — the gap is a century of ticket-price inflation.",
         source="Box Office Mojo, Top Lifetime Adjusted Grosses (domestic, adj. to 2022) — as of Sep 2026",
         dot_color="#005F73", dot2_color="#EE9B00",
         value_label="Adjusted (2022 $)", value2_label="Nominal (release $)",
@@ -71,9 +83,10 @@ def main() -> None:
     ww["label"] = ww["title"] + "  (" + ww["release_year"].astype(str) + ")"
     img2 = lollipop(
         ww, category_col="label", value_col="foreign_gross", value2_col="domestic_gross",
+        label_col="worldwide_gross",  # ranked by worldwide total; label that so it reads as sorted
         value_fmt=money_bil,
         title="Where the money really comes from: overseas",
-        subtitle="Top 15 films by worldwide gross (nominal $). Teal = international (rest of world), gold = domestic (U.S. & Canada).",
+        subtitle="Top 15 films by worldwide gross (nominal $), highest first. Teal = international (rest of world), gold = domestic (U.S. & Canada); label = worldwide total.",
         source="Box Office Mojo, Top Lifetime Grosses (Worldwide) — as of Sep 2026",
         dot_color="#005F73", dot2_color="#EE9B00",
         value_label="International", value2_label="Domestic (US/Canada)",
@@ -105,8 +118,8 @@ def main() -> None:
     genre["label"] = genre["value"].apply(lambda v: f"{'+' if v >= 0 else ''}{v*100:.0f}%")
     img3 = diverging_bars(
         genre, category_col="category", value_col="value", label_col="label",
-        title="Which genres travel? Blockbuster genres that skew overseas vs. at home",
-        subtitle="Share of international box office relative to domestic, top-200 worldwide films (genres with 10+ films). Right = over-indexes internationally; left = skews domestic.",
+        title="Every blockbuster genre earns most abroad — but some lean more than others",
+        subtitle="Top-200 worldwide films. All earn 62–68% overseas; bars show lean vs. that norm. Right = leans MORE international; left = relatively more domestic.",
         source="Box Office Mojo (Worldwide) + TMDB genres — as of Sep 2026",
         pos_color="#005F73", neg_color="#AE2012",
         img_width=img_w, img_height=img_h,
