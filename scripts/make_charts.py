@@ -22,7 +22,7 @@ sys.path.insert(0, str(WORKSPACE / "shared"))
 import duckdb  # noqa: E402
 
 from src.ingest import load_config  # noqa: E402
-from chart_templates import lollipop, single_ranked_bars, stacked_100pct_bars  # noqa: E402
+from chart_templates import lollipop, stacked_100pct_bars  # noqa: E402
 from viz import PRESETS  # noqa: E402
 
 
@@ -100,8 +100,8 @@ def main() -> None:
     img2 = stacked_100pct_bars(
         ww, group_col="label",
         segments=[
-            {"col": "home_pct", "label": "Home (US/Canada)", "color": "#EE9B00"},
             {"col": "foreign_pct", "label": "Rest of world", "color": "#005F73"},
+            {"col": "home_pct", "label": "Home (US/Canada)", "color": "#EE9B00"},
         ],
         title="Hollywood films: share of box office earned at home vs abroad",
         subtitle="Top 15 U.S.-produced films by worldwide gross, ordered by share earned abroad.",
@@ -111,35 +111,13 @@ def main() -> None:
     _display(img2)
     img2.save(out / "02_worldwide_domestic_vs_international.png")
 
-    # ── 3. Share of box office earned abroad, by genre (US films) ────────────
-    # Plain international share per genre — no index, no zero-line. Each film's
-    # gross is attributed to all its genres (ratio, so double-counting is fine).
-    genre = con.execute(
-        """
-        WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us = TRUE)
-        SELECT gl.genre AS category, COUNT(*) n,
-               ROUND(100.0*SUM(w.foreign_gross)/(SUM(w.domestic_gross)+SUM(w.foreign_gross)),1) AS value
-        FROM films_worldwide w
-        JOIN us ON us.title=w.title AND us.release_year=w.release_year
-        JOIN film_genres_long gl ON gl.title=w.title AND gl.release_year=w.release_year
-        GROUP BY gl.genre HAVING COUNT(*) >= 10
-        ORDER BY value DESC
-        """
-    ).df()
-    genre["pct_label"] = genre["value"].apply(lambda v: f"{v:.0f}%")
-    img3 = single_ranked_bars(
-        genre, category_col="category", value_col="value", total_label_col="pct_label",
-        bar_color="#005F73",
-        title="Every blockbuster genre earns most of its money abroad",
-        subtitle="Share of worldwide box office earned OUTSIDE the U.S. & Canada, by genre (top U.S.-made films). Even the lowest — sci-fi — takes ~61% overseas.",
-        source="Box Office Mojo (Worldwide) + TMDB genres/origin — as of Sep 2026",
-        img_width=img_w, img_height=img_h,
-    )
-    _display(img3)
-    img3.save(out / "03_genre_share_earned_abroad.png")
+    # NOTE: the genre "share earned abroad" chart is NOT a social export — the
+    # genres are all too close in value (61-68%) to be interesting. It stays as an
+    # exploration-only chart in 04-viz. A third social chart (international films
+    # with the largest U.S. box office) is planned — see artifacts/PROJECT-STATUS.md.
 
     con.close()
-    print("Saved 3 charts to", out)
+    print("Saved 2 social charts to", out)
 
 
 if __name__ == "__main__":

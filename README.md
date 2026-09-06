@@ -12,9 +12,6 @@ by side — **domestic vs. worldwide**, **nominal vs. inflation-adjusted**, and
 - **Hollywood's biggest films make most of their money abroad.** For nearly every
   top U.S.-produced film, the rest-of-world box office dwarfs the home (U.S. &
   Canada) take. *Avatar* made $785M at home and **$2.1B** abroad.
-- **Every genre earns most of its money overseas** — even the lowest, science
-  fiction, takes ~61% abroad. Crime, thriller and fantasy lean the most
-  international; the differences are real but modest (all fall in a 61–68% band).
 - **Adjust for inflation and the "biggest domestic film" is from 1939.** Measured
   in 2022 dollars, *Gone with the Wind* still tops the domestic chart (~$1.9B),
   ahead of *Star Wars* (1977) — the modern hits only lead the *nominal* board.
@@ -36,15 +33,7 @@ grows for the more internationally-dependent films.
 
 ![Home vs abroad, top US films](docs/02_worldwide_domestic_vs_international.png)
 
-## 2. Every blockbuster genre earns most of its money abroad
-
-Share of worldwide box office earned outside the U.S. & Canada, by genre
-(U.S.-made films, genres with 10+ films). Every genre clears 60%; science fiction
-is simply the lowest.
-
-![Share earned abroad, by genre](docs/03_genre_share_earned_abroad.png)
-
-## 3. The biggest *domestic* films, adjusted for inflation
+## 2. The biggest *domestic* films, adjusted for inflation
 
 A different question entirely: within the U.S. & Canada, adjusted for ticket-price
 inflation, who sold the most tickets? Gold = nominal (release-year $), teal =
