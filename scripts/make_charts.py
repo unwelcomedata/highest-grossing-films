@@ -65,8 +65,8 @@ def main() -> None:
     img1 = lollipop(
         dom, category_col="label", value_col="adjusted_gross", value2_col="nominal_gross",
         value_fmt=money_bil,
-        title="The biggest DOMESTIC films of all time, adjusted for inflation",
-        subtitle="U.S. & Canada only. Teal = adjusted to 2022 $, gold = nominal (release $) — the gap is a century of ticket-price inflation.",
+        title="The all-time top 15 domestic films, adjusted for inflation",
+        subtitle="Ranked by inflation-adjusted U.S. & Canada gross. Teal = adjusted to 2022 $, gold = what each film actually made at the time (nominal).",
         source="Box Office Mojo, Top Lifetime Adjusted Grosses (domestic, adj. to 2022) — as of Sep 2026",
         dot_color="#005F73", dot2_color="#EE9B00",
         value_label="Adjusted (2022 $)", value2_label="Nominal (release $)",
