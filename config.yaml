@@ -40,6 +40,50 @@ sources:
     table_index: 0
     js_render: false
 
+  # Box Office Mojo — Top Lifetime Grosses, FOREIGN LANGUAGE genre chart.
+  # Films whose primary language is NOT English, ranked by DOMESTIC (U.S. &
+  # Canada) lifetime gross. This is the correct universe for "which foreign
+  # films actually broke into the U.S. market" — it captures any non-English
+  # film's U.S. take regardless of its worldwide total (a foreign film whose
+  # audience was mostly American never lands in the worldwide top chart).
+  # NOMINAL (year-of-release) dollars. Static-fetchable (no JS).
+  bom_foreign:
+    url: "https://www.boxofficemojo.com/genre/sg4208980225/"
+    type: html_table
+    table_index: 0
+    js_render: false
+
+  # Box Office Mojo — Top Lifetime Grosses, DOMESTIC (U.S. & Canada), all-time.
+  # The deepest domestic lifetime chart BOM offers (top ~1000), paginated by an
+  # `offset` query param in steps of 200. This is the COMPLETE domestic universe
+  # used to answer "non-U.S.-origin films that did well in the U.S." honestly —
+  # every title is enriched with TMDB origin country, then filtered to non-U.S.
+  # origin. (The Foreign Language chart above is LANGUAGE-based and misses
+  # English-language non-U.S. films; this origin-based source does not.)
+  # NOMINAL (year-of-release) dollars. Static-fetchable (no JS).
+  bom_domestic_all:
+    url: "https://www.boxofficemojo.com/chart/top_lifetime_gross/"
+    type: html_table
+    table_index: 0
+    js_render: false
+    offsets: [0, 200, 400, 600, 800]   # 5 pages x 200 = top 1000
+    rate_limit_seconds: 1.5
+
+  # CPI-U (Consumer Price Index for All Urban Consumers, US city average, all
+  # items, NOT seasonally adjusted) — the standard inflation series, sourced
+  # from FRED (series CPIAUCNS), which mirrors the BLS CPI-U back to 1913 and is
+  # freely downloadable as CSV with no API key. (The BLS public API v1 without a
+  # registration key only returns ~3 recent years, insufficient for films back
+  # to 1937 — so FRED's full-history CSV is used instead.) Used to convert every
+  # film's NOMINAL box office to a CONSISTENT "today's dollars" basis (latest
+  # complete annual CPI), replacing Box Office Mojo's ticket-price/2022
+  # adjustment so all charts share one inflation method. Annual averages are
+  # computed from the monthly series in cleaning.
+  cpi:
+    csv_url: "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCNS"
+    series_id: "CPIAUCNS"
+    source_name: "FRED / BLS CPI-U (CPIAUCNS), US city average, all items, NSA"
+
   # TMDB — genre enrichment (looked up per film by title + year).
   # Requires a free API key in .env: TMDB_API_KEY (v3) or TMDB_READ_TOKEN (v4).
   # Not a config URL source; queried via src/ingest genre helper.

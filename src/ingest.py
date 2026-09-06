@@ -448,3 +448,101 @@ def tmdb_movie_country(
     }
     cache_path.write_text(json.dumps(rec), encoding="utf-8")
     return rec
+
+
+def tmdb_movie_companies(
+    tmdb_id: int,
+    api_key: str,
+    cfg: dict,
+    rate_limit_seconds: float = 0.3,
+) -> dict[str, Any]:
+    """Fetch a film's production companies from TMDB's movie detail endpoint.
+
+    Uses GET /3/movie/{id}, returns {tmdb_id, companies (list[str] of names),
+    company_countries (list[str] of ISO codes), has_us_studio (bool)}. Cached
+    per id under data/raw/tmdb/companies_<id>.json so re-runs are offline.
+
+    has_us_studio = True when any production company's origin_country is "US".
+    This is the "made within the U.S./Hollywood film industry" proxy: it counts
+    a film as U.S.-industry when a U.S.-registered studio co-produced it, which
+    correctly pulls U.S.-financed co-productions (Harry Potter, Bond, The
+    Odyssey) into Hollywood — unlike a country-of-origin field that follows
+    production-company registration or filming location. It is a documented
+    proxy, not a ground-truth "industry of origin" field, which does not exist
+    in any public dataset.
+    """
+    cache_path = _tmdb_cache_dir(cfg) / f"companies_{tmdb_id}.json"
+    if cache_path.exists():
+        return json.loads(cache_path.read_text(encoding="utf-8"))
+
+    time.sleep(rate_limit_seconds)
+    resp = requests.get(
+        f"{_TMDB_BASE}/movie/{tmdb_id}",
+        params={"api_key": api_key}, timeout=20,
+    )
+    resp.raise_for_status()
+    d = resp.json()
+    companies = d.get("production_companies", []) or []
+    names = [c.get("name") for c in companies if c.get("name")]
+    ctys = [c.get("origin_country") for c in companies if c.get("origin_country")]
+    rec = {
+        "tmdb_id": tmdb_id,
+        "companies": names,
+        "company_countries": ctys,
+        "has_us_studio": "US" in ctys,
+    }
+    cache_path.write_text(json.dumps(rec), encoding="utf-8")
+    return rec
+
+
+def fetch_cpi_annual(cfg: dict) -> "pd.DataFrame":
+    """Fetch CPI-U (CPIAUCNS via FRED) and return ANNUAL AVERAGES, cached to raw.
+
+    Returns a DataFrame [year:int, cpi:float, complete:bool] where cpi is the
+    mean of that year's monthly CPI-U values and `complete` marks whether all 12
+    months were present (the final year is usually partial). FRED's CPIAUCNS
+    mirrors the BLS CPI-U (US city average, all items, not seasonally adjusted)
+    back to 1913 and downloads as CSV without an API key — unlike the BLS public
+    API v1, which without a registration key only returns ~3 recent years.
+
+    Raw monthly CSV is cached to data/raw/cpi_cpiaucns_monthly.csv; the annual
+    table to data/raw/cpi_annual.parquet. Used to convert nominal box office to
+    constant "today's dollars" (latest COMPLETE annual CPI) on one basis.
+    """
+    from io import StringIO as _SIO
+
+    monthly_cache = raw_path(cfg, "cpi_cpiaucns_monthly.csv")
+    annual_cache = raw_path(cfg, "cpi_annual.parquet")
+    if annual_cache.exists():
+        return pd.read_parquet(annual_cache)
+
+    if monthly_cache.exists():
+        csv_text = monthly_cache.read_text(encoding="utf-8")
+    else:
+        url = cfg["sources"]["cpi"]["csv_url"]
+        resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=60)
+        resp.raise_for_status()
+        csv_text = resp.text
+        monthly_cache.write_text(csv_text, encoding="utf-8")
+
+    m = pd.read_csv(_SIO(csv_text))
+    m.columns = ["date", "cpi"]
+    m["date"] = pd.to_datetime(m["date"])
+    m["year"] = m["date"].dt.year
+    grp = m.groupby("year")["cpi"]
+    annual = grp.mean().reset_index()
+    annual["complete"] = (grp.count().values == 12)
+    annual = annual.sort_values("year").reset_index(drop=True)
+
+    # Trailing-12-month base for a genuine "today's dollars" reference. The NSA
+    # CPI-U has a reporting lag / occasional missing month, so the latest
+    # calendar year is usually incomplete; the mean of the most recent 12
+    # available monthly readings is the most current honest base index. Stored
+    # as DataFrame attrs (a scalar), so the per-year table stays integer-keyed
+    # for joins.
+    last12 = m.dropna(subset=["cpi"]).sort_values("date").tail(12)
+    annual.attrs["ttm_cpi"] = float(last12["cpi"].mean())
+    annual.attrs["ttm_end"] = f"{last12['date'].max():%Y-%m}"
+    annual.attrs["ttm_complete"] = bool(len(last12) == 12)
+    annual.to_parquet(annual_cache)
+    return annual
