@@ -109,33 +109,42 @@ foreign = everywhere else.** Lifetime totals include all theatrical runs
 
 ---
 
-## TMDB (The Movie Database) — film genres
+## TMDB (The Movie Database) — film genres & country of origin
 
 - **Publisher:** TMDB, https://www.themoviedb.org/
 - **Retrieved:** 2026-09-06
-- **Use:** genre label(s) per film, matched by title + release year via the TMDB
-  search API. `primary_genre` is TMDB's first-listed genre; a film usually has
-  several (e.g. *Avatar* = Science Fiction, Action, Adventure).
-- **Match rate:** 321/321 films across both boards matched.
+- **Use:** genre label(s) and **country of origin** per film, matched by title +
+  release year. `primary_genre` is TMDB's first-listed genre; a film usually has
+  several (e.g. *Avatar* = Science Fiction, Action, Adventure). `origin_country`
+  and the derived `is_us` flag come from TMDB's movie-detail endpoint.
+- **Match rate:** 321/321 films matched.
+
+### Why origin country matters (the "domestic" fix)
+
+Box Office Mojo's "domestic" = **U.S. & Canada**, which is only a film's *home*
+market for U.S.-made films. A Chinese blockbuster like *Ne Zha 2* earned ~$2.3B
+almost entirely in China, but that shows up as "foreign" — making it look like a
+film that conquered the world when it conquered its home market. To keep the
+home-vs-abroad comparison consistent, the domestic-vs-international and genre
+charts are **restricted to U.S.-produced films** (`is_us = TRUE`). Non-U.S. films
+remain in the dataset for a separate analysis.
 
 ### Method & caveats (genre analysis)
 
 - **Genres are TMDB's editorial tags**, applied by their contributor community —
   a reasonable but not authoritative taxonomy.
-- **Multi-genre attribution.** In the "which genres travel" analysis, each film's
-  full domestic and foreign gross is attributed to *each* of its genres, so a
-  film like *Avatar* contributes to Sci-Fi, Action, and Adventure alike. Grosses
-  therefore **double-count across genre buckets**. The over/under-index metric is
-  a *ratio* (a genre's share of international gross ÷ its share of domestic gross),
-  so the double-counting affects numerator and denominator similarly and the
-  directional signal holds — but absolute per-genre dollar totals should not be
-  summed as if mutually exclusive.
-- **Sample is the top-200 *worldwide* films** — all already-global hits. The genre
-  index therefore says "*among blockbusters*, which genres lean international vs
-  domestic," not "which genres travel" in general.
-- **Small-genre noise.** The published genre chart is restricted to genres with
-  **10+ films**; sparse genres (e.g. Mystery, n≈6) are excluded because a couple
-  of films would swing the index.
+- **Multi-genre attribution.** Each film's full domestic and foreign gross is
+  attributed to *each* of its genres, so a film like *Avatar* contributes to
+  Sci-Fi, Action, and Adventure alike. Grosses therefore **double-count across
+  genre buckets**. The genre chart shows a **share** (fraction of a genre's total
+  gross earned outside the U.S. & Canada), not a sum, so the double-counting is
+  fine — but absolute per-genre dollar totals should not be summed as if mutually
+  exclusive.
+- **Sample is U.S.-made films from the box-office top lists** — all already-large
+  hits. Read the genre chart as "*among big U.S. films*, what share of each
+  genre's take comes from abroad," not "which genres travel" in general.
+- **Small-genre noise.** The genre chart is restricted to genres with **10+
+  films**; sparse genres (e.g. Mystery) are excluded.
 
 ### Licensing / attribution
 

@@ -22,7 +22,7 @@ sys.path.insert(0, str(WORKSPACE / "shared"))
 import duckdb  # noqa: E402
 
 from src.ingest import load_config  # noqa: E402
-from chart_templates import lollipop, diverging_bars  # noqa: E402
+from chart_templates import lollipop, single_ranked_bars  # noqa: E402
 from viz import PRESETS  # noqa: E402
 
 
@@ -75,57 +75,59 @@ def main() -> None:
     _display(img1)
     img1.save(out / "01_domestic_adjusted_vs_nominal.png")
 
-    # ── 2. Worldwide top films — domestic vs international split ──────────────
+    # ── 2. Worldwide top films — home (US/Canada) vs abroad ──────────────────
+    # Restrict to US-produced films so "domestic" (US & Canada box office) means
+    # the film's HOME market. Non-US films (e.g. Chinese blockbusters) are excluded
+    # here — for them US/Canada isn't home — and analysed separately.
     ww = con.execute(
-        "SELECT title, release_year, domestic_gross, foreign_gross, worldwide_gross "
-        "FROM films_worldwide ORDER BY worldwide_gross DESC LIMIT 15"
+        """
+        WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us = TRUE)
+        SELECT w.title, w.release_year, w.domestic_gross, w.foreign_gross, w.worldwide_gross
+        FROM films_worldwide w JOIN us ON us.title=w.title AND us.release_year=w.release_year
+        ORDER BY w.worldwide_gross DESC LIMIT 15
+        """
     ).df()
     ww["label"] = ww["title"] + "  (" + ww["release_year"].astype(str) + ")"
     img2 = lollipop(
         ww, category_col="label", value_col="foreign_gross", value2_col="domestic_gross",
         label_col="worldwide_gross",  # ranked by worldwide total; label that so it reads as sorted
         value_fmt=money_bil,
-        title="Where the money really comes from: overseas",
-        subtitle="Top 15 films by worldwide gross (nominal $), highest first. Teal = international (rest of world), gold = domestic (U.S. & Canada); label = worldwide total.",
-        source="Box Office Mojo, Top Lifetime Grosses (Worldwide) — as of Sep 2026",
+        title="Hollywood's biggest films make most of their money abroad",
+        subtitle="Top 15 U.S.-produced films by worldwide gross (nominal $), highest first. Gold = home (U.S. & Canada), teal = rest of world; label = worldwide total.",
+        source="Box Office Mojo, Top Lifetime Grosses (Worldwide) + TMDB origin country — as of Sep 2026",
         dot_color="#005F73", dot2_color="#EE9B00",
-        value_label="International", value2_label="Domestic (US/Canada)",
+        value_label="Rest of world", value2_label="Home (US/Canada)",
         img_width=img_w, img_height=img_h,
     )
     _display(img2)
     img2.save(out / "02_worldwide_domestic_vs_international.png")
 
-    # ── 3. Genre over/under-index (international vs domestic lean) ────────────
+    # ── 3. Share of box office earned abroad, by genre (US films) ────────────
+    # Plain international share per genre — no index, no zero-line. Each film's
+    # gross is attributed to all its genres (ratio, so double-counting is fine).
     genre = con.execute(
         """
-        WITH fg AS (
-            SELECT w.domestic_gross, w.foreign_gross, g.genre
-            FROM films_worldwide w
-            JOIN film_genres_long g ON g.title=w.title AND g.release_year=w.release_year
-        ),
-        tot AS (SELECT SUM(domestic_gross) d, SUM(foreign_gross) f FROM fg),
-        bygenre AS (
-            SELECT genre, COUNT(*) n, SUM(domestic_gross) dom, SUM(foreign_gross) intl
-            FROM fg GROUP BY genre HAVING COUNT(*) >= 10
-        )
-        SELECT genre AS category,
-               ROUND((intl/(SELECT f FROM tot)) / NULLIF(dom/(SELECT d FROM tot),0) - 1, 3) AS value
-        FROM bygenre
+        WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us = TRUE)
+        SELECT gl.genre AS category, COUNT(*) n,
+               ROUND(100.0*SUM(w.foreign_gross)/(SUM(w.domestic_gross)+SUM(w.foreign_gross)),1) AS value
+        FROM films_worldwide w
+        JOIN us ON us.title=w.title AND us.release_year=w.release_year
+        JOIN film_genres_long gl ON gl.title=w.title AND gl.release_year=w.release_year
+        GROUP BY gl.genre HAVING COUNT(*) >= 10
         ORDER BY value DESC
         """
     ).df()
-    # value > 0 => over-indexes international; < 0 => skews domestic
-    genre["label"] = genre["value"].apply(lambda v: f"{'+' if v >= 0 else ''}{v*100:.0f}%")
-    img3 = diverging_bars(
-        genre, category_col="category", value_col="value", label_col="label",
-        title="Every blockbuster genre earns most abroad — but some lean more than others",
-        subtitle="Top-200 worldwide films. All earn 62–68% overseas; bars show lean vs. that norm. Right = leans MORE international; left = relatively more domestic.",
-        source="Box Office Mojo (Worldwide) + TMDB genres — as of Sep 2026",
-        pos_color="#005F73", neg_color="#AE2012",
+    genre["pct_label"] = genre["value"].apply(lambda v: f"{v:.0f}%")
+    img3 = single_ranked_bars(
+        genre, category_col="category", value_col="value", total_label_col="pct_label",
+        bar_color="#005F73",
+        title="Every blockbuster genre earns most of its money abroad",
+        subtitle="Share of worldwide box office earned OUTSIDE the U.S. & Canada, by genre (top U.S.-made films). Even the lowest — sci-fi — takes ~61% overseas.",
+        source="Box Office Mojo (Worldwide) + TMDB genres/origin — as of Sep 2026",
         img_width=img_w, img_height=img_h,
     )
     _display(img3)
-    img3.save(out / "03_genre_international_vs_domestic_index.png")
+    img3.save(out / "03_genre_share_earned_abroad.png")
 
     con.close()
     print("Saved 3 charts to", out)

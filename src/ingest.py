@@ -409,3 +409,42 @@ def tmdb_lookup_movie(
         }
     cache_path.write_text(json.dumps(rec), encoding="utf-8")
     return rec
+
+
+def tmdb_movie_country(
+    tmdb_id: int,
+    api_key: str,
+    cfg: dict,
+    rate_limit_seconds: float = 0.3,
+) -> dict[str, Any]:
+    """Fetch a film's country of origin from TMDB's movie detail endpoint.
+
+    Uses GET /3/movie/{id}, returns {tmdb_id, origin_country (list[str]),
+    production_countries (list[str]), is_us (bool)}. Cached per id under
+    data/raw/tmdb/country_<id>.json so re-runs are offline.
+
+    is_us = True when the U.S. is among the film's origin/production countries —
+    used to keep the domestic-vs-international analysis to films for which
+    "domestic" (U.S. & Canada box office) actually means the home market.
+    """
+    cache_path = _tmdb_cache_dir(cfg) / f"country_{tmdb_id}.json"
+    if cache_path.exists():
+        return json.loads(cache_path.read_text(encoding="utf-8"))
+
+    time.sleep(rate_limit_seconds)
+    resp = requests.get(
+        f"{_TMDB_BASE}/movie/{tmdb_id}",
+        params={"api_key": api_key}, timeout=20,
+    )
+    resp.raise_for_status()
+    d = resp.json()
+    origin = d.get("origin_country", []) or []
+    prod = [c.get("iso_3166_1") for c in d.get("production_countries", [])]
+    rec = {
+        "tmdb_id": tmdb_id,
+        "origin_country": origin,
+        "production_countries": prod,
+        "is_us": ("US" in origin) or ("US" in prod),
+    }
+    cache_path.write_text(json.dumps(rec), encoding="utf-8")
+    return rec

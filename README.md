@@ -9,35 +9,40 @@ by side — **domestic vs. worldwide**, **nominal vs. inflation-adjusted**, and
 
 **The findings:**
 
-- **Most of the money is overseas.** For nearly every top film, the international
-  (rest-of-world) box office dwarfs the domestic (U.S. & Canada) take. *Avatar*
-  made $785M at home and **$2.1B** abroad. The extreme case: **Ne Zha 2** (2025)
-  grossed **$2.25B internationally on just $23M domestic** — a global blockbuster
-  almost nobody in the U.S. saw.
+- **Hollywood's biggest films make most of their money abroad.** For nearly every
+  top U.S.-produced film, the rest-of-world box office dwarfs the home (U.S. &
+  Canada) take. *Avatar* made $785M at home and **$2.1B** abroad.
+- **Every genre earns most of its money overseas** — even the lowest, science
+  fiction, takes ~61% abroad. Crime, thriller and fantasy lean the most
+  international; the differences are real but modest (all fall in a 61–68% band).
 - **Adjust for inflation and the "biggest domestic film" is from 1939.** Measured
   in 2022 dollars, *Gone with the Wind* still tops the domestic chart (~$1.9B),
   ahead of *Star Wars* (1977) — the modern hits only lead the *nominal* board.
-- **Story genres travel; spectacle skews home.** Among the top-200 worldwide
-  films, Crime, Drama, Thriller and Fantasy earn a *bigger* share of their money
-  abroad than at home, while — surprisingly — **Science Fiction skews the most
-  domestic**.
+
+> **A note on "domestic."** Box Office Mojo's "domestic" means the **U.S. &
+> Canada** market — which only equals a film's *home* market for U.S.-made films.
+> So the home-vs-abroad charts here are **restricted to U.S.-produced films**.
+> Non-U.S. blockbusters (e.g. China's *Ne Zha 2*, which grossed ~$2.3B almost
+> entirely at home) would otherwise look like they "earned it all abroad" when
+> they earned it in their own country. Those films are a separate story.
 
 ---
 
-## 1. Where the money comes from: overseas
+## 1. Hollywood's biggest films make most of their money abroad
 
-Top 15 films by worldwide gross. Gold = domestic (U.S. & Canada), teal =
-international. The connector length is how lopsided each film is toward overseas.
+Top 15 U.S.-produced films by worldwide gross. Gold = home (U.S. & Canada), teal =
+rest of world. The connector length shows how lopsided each film is toward
+overseas.
 
-![Worldwide gross: domestic vs international](docs/02_worldwide_domestic_vs_international.png)
+![Home vs abroad, top US films](docs/02_worldwide_domestic_vs_international.png)
 
-## 2. Which genres travel?
+## 2. Every blockbuster genre earns most of its money abroad
 
-Each genre's share of *international* box office relative to its share of
-*domestic*, for the top-200 worldwide films. Right = over-indexes abroad; left =
-skews domestic. (Genres with 10+ films; see the method note on multi-genre films.)
+Share of worldwide box office earned outside the U.S. & Canada, by genre
+(U.S.-made films, genres with 10+ films). Every genre clears 60%; science fiction
+is simply the lowest.
 
-![Genres that skew international vs domestic](docs/03_genre_international_vs_domestic_index.png)
+![Share earned abroad, by genre](docs/03_genre_share_earned_abroad.png)
 
 ## 3. The biggest *domestic* films, adjusted for inflation
 
@@ -59,12 +64,12 @@ adjusted to 2022 $.
 - **The adjusted domestic chart** uses *ticket-price* inflation (estimated tickets
   sold × the 2022 average ticket price), not CPI. It effectively ranks by tickets
   sold. Classics' totals include decades of re-releases.
-- **Genre** comes from TMDB, matched by title + year. In the "which genres travel"
-  chart, each film's gross is attributed to *every* one of its genres, so grosses
-  double-count across genres; the metric is a **ratio** (international share ÷
-  domestic share), which stays valid under that attribution. The sample is
-  already-global blockbusters, so read it as "among big hits, which genres lean
-  which way."
+- **Genre & origin country** come from TMDB, matched by title + year. The
+  home-vs-abroad and genre charts are restricted to **U.S.-produced films** (via
+  TMDB's origin country) so "home" means the same market for every film. In the
+  genre chart, each film's gross is attributed to *every* one of its genres, so
+  grosses double-count across genres — fine, because the chart shows a **share**
+  (fraction earned abroad) per genre, not a sum.
 
 **Snapshot as of September 2026.** Box-office figures are lifetime-to-date; films
 still in theaters when the data was pulled (some 2026 titles) have totals that
