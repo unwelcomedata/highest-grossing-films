@@ -22,7 +22,7 @@ sys.path.insert(0, str(WORKSPACE / "shared"))
 import duckdb  # noqa: E402
 
 from src.ingest import load_config  # noqa: E402
-from chart_templates import lollipop, single_ranked_bars  # noqa: E402
+from chart_templates import lollipop, single_ranked_bars, stacked_100pct_bars  # noqa: E402
 from viz import PRESETS  # noqa: E402
 
 
@@ -79,14 +79,17 @@ def main() -> None:
     # Restrict to US-produced films so "domestic" (US & Canada box office) means
     # the film's HOME market. Non-US films (e.g. Chinese blockbusters) are excluded
     # here — for them US/Canada isn't home — and analysed separately.
-    # Take the top 15 US films by worldwide gross, then ORDER BY the split
-    # (foreign share) so the chart reads from most-lopsided-abroad to most balanced.
+    # 100% stacked bar of the split (home % vs abroad %), ordered by share abroad
+    # so the teal segment shrinks down the list — the visual matches the sort.
+    # (A dumbbell of absolute dollars can't do this: line length = dollar gap, which
+    # doesn't track the percentage order.)
     ww = con.execute(
         """
         WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us = TRUE),
         top AS (
-            SELECT w.title, w.release_year, w.domestic_gross, w.foreign_gross, w.worldwide_gross,
-                   100.0*w.foreign_gross/w.worldwide_gross AS foreign_pct
+            SELECT w.title, w.release_year,
+                   100.0*w.foreign_gross/w.worldwide_gross AS foreign_pct,
+                   100.0*w.domestic_gross/w.worldwide_gross AS home_pct
             FROM films_worldwide w JOIN us ON us.title=w.title AND us.release_year=w.release_year
             ORDER BY w.worldwide_gross DESC LIMIT 15
         )
@@ -94,17 +97,16 @@ def main() -> None:
         """
     ).df()
     ww["label"] = ww["title"] + "  (" + ww["release_year"].astype(str) + ")"
-    ww["split_label"] = ww["foreign_pct"].apply(lambda p: f"{p:.0f}% abroad")
-    img2 = lollipop(
-        ww, category_col="label", value_col="foreign_gross", value2_col="domestic_gross",
-        label_col="split_label",  # sorted by the split; label the foreign share
-        value_fmt=lambda v: v,    # split_label is already a string
-        title="Hollywood's biggest films make most of their money abroad",
-        subtitle="Top 15 U.S.-produced films by worldwide gross, ordered by the split. Gold = home (U.S. & Canada), teal = rest of world; label = share earned abroad.",
+    img2 = stacked_100pct_bars(
+        ww, group_col="label",
+        segments=[
+            {"col": "home_pct", "label": "Home (US/Canada)", "color": "#EE9B00"},
+            {"col": "foreign_pct", "label": "Rest of world", "color": "#005F73"},
+        ],
+        title="Hollywood films: share of box office earned at home vs abroad",
+        subtitle="Top 15 U.S.-produced films by worldwide gross, ordered by share earned abroad.",
         source="Box Office Mojo, Top Lifetime Grosses (Worldwide) + TMDB origin country — as of Sep 2026",
-        dot_color="#005F73", dot2_color="#EE9B00",
-        value_label="Rest of world", value2_label="Home (US/Canada)",
-        img_width=img_w, img_height=img_h,
+        bar_height=34, bar_gap=12, img_width=img_w, img_height=img_h,
     )
     _display(img2)
     img2.save(out / "02_worldwide_domestic_vs_international.png")

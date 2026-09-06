@@ -30,9 +30,9 @@ by side — **domestic vs. worldwide**, **nominal vs. inflation-adjusted**, and
 
 ## 1. Hollywood's biggest films make most of their money abroad
 
-Top 15 U.S.-produced films by worldwide gross. Gold = home (U.S. & Canada), teal =
-rest of world. The connector length shows how lopsided each film is toward
-overseas.
+Top 15 U.S.-produced films by worldwide gross, ordered by the share earned
+abroad. Gold = home (U.S. & Canada), teal = rest of world — the teal segment
+grows for the more internationally-dependent films.
 
 ![Home vs abroad, top US films](docs/02_worldwide_domestic_vs_international.png)
 
