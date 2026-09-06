@@ -1,46 +1,24 @@
-# Scripts — Pipeline Run Order
+# Scripts
 
-Full rebuild from raw data to export. Each step depends on the previous.
-
-## Prerequisites
-
-- Python 3.11+ with packages from `requirements.txt`
-- `data/raw/` populated with source files (see SOURCES.md)
-- Playwright + Chromium installed if any source uses `js_render: true`
+Fun-tier project — no public one-command reproducible pipeline is required. The
+walkthrough lives in the numbered `notebooks/` (01-ingest → 06-viz-social). These
+scripts are the same logic in linear form, handy for a full rebuild.
 
 ## Run order
 
 ```bash
-# 1. Ingestion — fetch all sources → data/raw/ → DuckDB tables
-python scripts/ingest_all.py
-
-# 2. Cleaning — standardize raw tables → data/interim/ (Parquet)
-python scripts/clean_all.py
-
-# 3. Export — join clean tables → export/ (CSV, Excel, Parquet + codebook)
-python scripts/prepare_export.py
+python scripts/ingest.py        # fetch Box Office Mojo adjusted chart -> data/raw/ -> DuckDB (films_adjusted)
+python scripts/make_charts.py   # render the lollipop/dumbbell lead chart -> outputs/social/
 ```
 
-## Conventions
+`scripts/ingest.py` fetches the source (or reuses the cached raw HTML in
+`data/raw/`), cleans it in DuckDB, registers provenance in `_sources`, and saves
+interim Parquet. The export (CSV + codebook) is produced by `notebooks/03-prepare.ipynb`.
 
-- **One script per pipeline stage.** Don't accumulate one-off scripts — if logic
-  is absorbed into a main script, delete the original.
-- **Only the current export version lives in `export/`.** Tag old versions in git.
-- **Interim parquets must 1:1 match their DuckDB table names.** When you rename a
-  table, rename or delete the corresponding parquet.
-- **Document run order here** whenever you add a new script.
+## Notes
 
-## Script descriptions
-
-| Script | Purpose | Inputs | Outputs |
-|--------|---------|--------|---------|
-| `ingest_all.py` | Fetch and load all data sources | `config.yaml`, web | DuckDB tables, `data/raw/` |
-| `clean_all.py` | Standardize and quality-check | DuckDB raw tables | `data/interim/*.parquet` |
-| `prepare_export.py` | Build final joined dataset | DuckDB clean tables | `export/*` |
-
-## Adding a new script
-
-1. Add it to the run-order table above
-2. Ensure it reads from DuckDB (not from other scripts' intermediate files)
-3. Ensure it writes its output to DuckDB and/or interim parquet
-4. Update the `_sources` metadata table if ingesting new data
+- The chart is rendered by the shared Pillow factory (`shared/chart_templates.py`
+  → `lollipop`), not matplotlib. matplotlib is not used in this project (and does
+  not run in its Python 3.14 venv due to a `MarkerStyle` deepcopy recursion).
+- `scripts/_build_notebooks.py` is a one-off dev helper that generated the
+  numbered notebooks; it is not part of the pipeline.
