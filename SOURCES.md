@@ -101,6 +101,11 @@ foreign = everywhere else.** Lifetime totals include all theatrical runs
 - **China-heavy films** (e.g. *Ne Zha 2*, *The Battle at Lake Changjin*, *Wolf
   Warrior 2*) can post enormous worldwide totals with near-zero domestic gross —
   a real signal, not an error.
+- **Figures are a snapshot as of the retrieval date (2026-09-06).** Films still in
+  theatrical release when the data was pulled (e.g. 2026 titles like *Spider-Man:
+  Brand New Day* and *The Odyssey*) have **incomplete lifetime totals that will
+  keep climbing**. Any chart or post must carry an "as-of 2026-09-06" note, and
+  in-release films should be read as lower bounds, not final.
 
 ---
 

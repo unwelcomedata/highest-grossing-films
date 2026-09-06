@@ -66,6 +66,10 @@ adjusted to 2022 $.
   already-global blockbusters, so read it as "among big hits, which genres lean
   which way."
 
+**Snapshot as of September 2026.** Box-office figures are lifetime-to-date; films
+still in theaters when the data was pulled (some 2026 titles) have totals that
+will keep rising, so treat those as lower bounds.
+
 Full per-source detail, definitions, and caveats are in [SOURCES.md](SOURCES.md).
 
 ---
