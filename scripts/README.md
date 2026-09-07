@@ -9,9 +9,30 @@ scripts are the same logic in linear form, handy for a full rebuild.
 ```bash
 python scripts/ingest.py            # BOM adjusted-domestic chart  -> DuckDB (films_adjusted)
 python scripts/ingest_worldwide.py  # BOM worldwide chart          -> DuckDB (films_worldwide)
-python scripts/enrich_genres.py     # TMDB genre lookup per film    -> DuckDB (films_genre, film_genres_long)
+python scripts/enrich_genres.py     # TMDB genre + origin lookup    -> DuckDB (films_genre, films_foreign_us)
 python scripts/make_charts.py       # render the 3 charts           -> outputs/social/
+python scripts/validate_charts.py   # PRE-PUBLISH GATE (see below)   -> exits non-zero on any failure
 ```
+
+## ⭐ Pre-publish validation gate — `validate_charts.py`
+
+**Run this and confirm it exits 0 before curating the release branch or flipping
+the repo public.** It re-derives what each of the three published charts should
+show directly from the DuckDB source, and fails (non-zero exit) if:
+
+- an export CSV in `export/` has drifted from its DuckDB source table,
+- a headline chart fact changed (top film per chart + a spot-check dollar value),
+- a structural invariant breaks (worldwide = domestic + foreign; CPI-adjusted >=
+  nominal; expected row counts; the displayed foreign-language top 15 are
+  predominantly non-U.S. origin).
+
+```bash
+.venv/bin/python scripts/validate_charts.py   # RESULT: all N checks passed - safe to publish.
+```
+
+If it reports a drift, regenerate the exports (`notebooks/03-prepare.ipynb`) and
+re-render charts (`06-viz-social.ipynb`) until it passes. Do not publish on a
+failure.
 
 - `ingest.py` / `ingest_worldwide.py` fetch each Box Office Mojo chart (or reuse
   the cached raw HTML in `data/raw/`), clean in DuckDB, register provenance in
