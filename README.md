@@ -1,6 +1,6 @@
-**[@unwelcomedata](https://unwelcomedata.github.io/highest-grossing-films/)** · data from public sources
+**[@unwelcomedata](https://github.com/unwelcomedata)** · data from public sources
 
-# "Highest-grossing" depends entirely on how you count
+# Highest-Grossing Films: it depends entirely on how you count
 
 Ask which films are the biggest ever and you get different answers depending on
 *where* and *when* you measure. This project lays a few honest lenses side by
