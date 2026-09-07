@@ -2,63 +2,80 @@
 
 # "Highest-grossing" depends entirely on how you count
 
-Ask which films are the biggest ever and you'll get three different answers
-depending on where and when you measure. This project lays the three lenses side
-by side — **domestic vs. worldwide**, **nominal vs. inflation-adjusted**, and
-**by genre** — because the disagreements between them are the interesting part.
+Ask which films are the biggest ever and you get different answers depending on
+*where* and *when* you measure. This project lays a few honest lenses side by
+side — **home vs. abroad**, **nominal vs. inflation-adjusted**, and **English vs.
+foreign-language** — because the disagreements between them are the interesting
+part.
 
 **The findings:**
 
 - **Hollywood's biggest films make most of their money abroad.** For nearly every
   top U.S.-produced film, the rest-of-world box office dwarfs the home (U.S. &
   Canada) take. *Avatar* made $785M at home and **$2.1B** abroad.
-- **Adjust for inflation and the "biggest domestic film" is from 1939.** Measured
-  in 2022 dollars, *Gone with the Wind* still tops the domestic chart (~$1.9B),
-  ahead of *Star Wars* (1977) — the modern hits only lead the *nominal* board.
+- **Adjust for inflation and the biggest domestic film is from 1939.** In constant
+  2026 dollars (CPI-U), *Gone with the Wind* still tops the domestic chart
+  (~$4.7B), ahead of *Snow White* (1937) and *Star Wars* (1977). Modern hits only
+  lead the *nominal* board.
+- **The foreign-language film that broke into the U.S. isn't a recent one.**
+  *Crouching Tiger, Hidden Dragon* (2000) still leads U.S. box office for a
+  non-English film (~$244M in today's dollars), ahead of *Life Is Beautiful*,
+  *Hero*, and *Parasite*.
 
 > **A note on "domestic."** Box Office Mojo's "domestic" means the **U.S. &
 > Canada** market — which only equals a film's *home* market for U.S.-made films.
-> So the home-vs-abroad charts here are **restricted to U.S.-produced films**.
-> Non-U.S. blockbusters (e.g. China's *Ne Zha 2*, which grossed ~$2.3B almost
-> entirely at home) would otherwise look like they "earned it all abroad" when
-> they earned it in their own country. Those films are a separate story.
+> So the home-vs-abroad chart is **restricted to U.S.-produced films**. A Chinese
+> blockbuster like *Ne Zha 2* (~$2.3B, almost entirely at home) would otherwise
+> look like it "earned it all abroad" when it earned it in its own country.
 
 ---
 
 ## 1. Hollywood's biggest films make most of their money abroad
 
 Top 15 U.S.-produced films by worldwide gross, ordered by the share earned
-abroad. Gold = home (U.S. & Canada), teal = rest of world — the teal segment
+abroad. Teal = rest of world, gold = home (U.S. & Canada) — the teal segment
 grows for the more internationally-dependent films.
 
 ![Home vs abroad, top US films](docs/02_worldwide_domestic_vs_international.png)
 
 ## 2. The biggest *domestic* films, adjusted for inflation
 
-A different question entirely: within the U.S. & Canada, adjusted for ticket-price
-inflation, who sold the most tickets? Gold = nominal (release-year $), teal =
-adjusted to 2022 $.
+A different question: within the U.S. & Canada, once general inflation is
+accounted for, who sold the most? Every film's lifetime gross is restated in
+**constant 2026 dollars (CPI-U)**. The gold dot is what each film actually made
+at the time (nominal); the connector shows how far inflation moves it.
 
-![Domestic gross, adjusted vs nominal](docs/01_domestic_adjusted_vs_nominal.png)
+![Domestic gross, today's dollars vs nominal](docs/01_domestic_adjusted_vs_nominal.png)
+
+## 3. The foreign-language films that broke into the U.S.
+
+Which non-English-language films earned the most in the U.S. & Canada, in constant
+2026 dollars. Country of origin is under each title — the list is more diverse than
+you'd guess (Hong Kong, Italy, China, France, South Korea, Mexico).
+
+![Top foreign-language films by US box office](docs/03_foreign_language_us_gross.png)
 
 ---
 
 ## How it was measured
 
-- **Worldwide / domestic / international** grosses are **nominal** (year-of-release
-  dollars) from Box Office Mojo. Domestic = U.S. & Canada; international =
-  everywhere else. Nominal dollars favor recent films (higher prices, more
-  markets) — which is exactly why the adjusted domestic chart tells a different
-  story.
-- **The adjusted domestic chart** uses *ticket-price* inflation (estimated tickets
-  sold × the 2022 average ticket price), not CPI. It effectively ranks by tickets
-  sold. Classics' totals include decades of re-releases.
-- **Genre & origin country** come from TMDB, matched by title + year. The
-  home-vs-abroad and genre charts are restricted to **U.S.-produced films** (via
-  TMDB's origin country) so "home" means the same market for every film. In the
-  genre chart, each film's gross is attributed to *every* one of its genres, so
-  grosses double-count across genres — fine, because the chart shows a **share**
-  (fraction earned abroad) per genre, not a sum.
+- **Home / abroad grosses** are **nominal** (year-of-release dollars) from Box
+  Office Mojo's worldwide lifetime chart. Domestic = U.S. & Canada; the rest is
+  "abroad." Chart 1 shows *shares* of each film's own total, so inflation doesn't
+  distort it.
+- **Inflation adjustment uses CPI-U, not ticket prices.** Charts 2 and 3 restate
+  each film's nominal lifetime gross into **constant 2026 dollars** using the
+  U.S. Consumer Price Index (CPI-U, all-items), on a trailing-12-month base. This
+  is *general* inflation — deliberately a single, consistent basis across both
+  charts. (It is **not** Box Office Mojo's own "ticket-price adjusted" figure,
+  which only offers a 2022 base and no foreign version, so the numbers here differ
+  from BOM's adjusted chart on purpose.)
+- **Foreign-language** (chart 3) means non-English-language films, from Box Office
+  Mojo's Foreign Language chart, ranked by U.S. & Canada lifetime gross. Country of
+  origin comes from TMDB.
+- **Re-releases** inflate the lifetime totals of some classics (*Gone with the
+  Wind*, *Star Wars*, *E.T.* were re-released theatrically) — their totals reflect
+  total historical audience, not one release.
 
 **Snapshot as of September 2026.** Box-office figures are lifetime-to-date; films
 still in theaters when the data was pulled (some 2026 titles) have totals that
@@ -70,22 +87,23 @@ Full per-source detail, definitions, and caveats are in [SOURCES.md](SOURCES.md)
 
 ## The data
 
-Published datasets are in [`export/`](export/):
+Published datasets are in [`export/`](export/), each with a `*_codebook.md`
+describing every column:
 
-- `highest_grossing_films_v1.csv` — domestic, inflation-adjusted top 200 (adjusted
-  + nominal gross, tickets, year, inflation multiple).
-- `films_worldwide_v1.csv` — worldwide top 200 with domestic / international split.
-- `films_genre_v1.csv` — genre(s) per film (TMDB).
-
-Each ships with a `*_codebook.md` describing every column.
+- `highest_grossing_films_v1.csv` — top domestic films, adjusted to constant 2026
+  dollars (CPI-U) alongside nominal gross and release year.
+- `films_worldwide_v1.csv` — worldwide top films with the home / abroad split.
+- `films_foreign_us_v1.csv` — top foreign-language films by U.S. & Canada gross,
+  with country of origin.
 
 ---
 
 ## Sources & license
 
-Box Office Mojo (domestic adjusted + worldwide) and TMDB (genres). Full
-attribution and caveats in [SOURCES.md](SOURCES.md). "This product uses the TMDB
-API but is not endorsed or certified by TMDB." No crowd-edited sources are used.
+Box Office Mojo (domestic, worldwide, and foreign-language lifetime grosses), TMDB
+(country of origin), and U.S. CPI-U (via FRED) for inflation. Full attribution and
+caveats in [SOURCES.md](SOURCES.md). "This product uses the TMDB API but is not
+endorsed or certified by TMDB." No crowd-edited sources are used.
 
 ---
 
