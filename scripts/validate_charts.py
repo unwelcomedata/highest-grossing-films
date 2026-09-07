@@ -80,10 +80,14 @@ def main() -> int:
         "SELECT * FROM films_adjusted ORDER BY adjusted_gross DESC"
     ).df()
     check("chart2: films_adjusted has 200 rows", len(adj) == 200, f"got {len(adj)}")
+    # Ticket-price adjustment: pre-1980 films should always adjust UP (ticket
+    # prices rose a lot since). Recent films can sit at/near nominal, so we only
+    # assert the direction for older titles rather than universally.
+    old = adj[adj.release_year < 1980]
     check(
-        "chart2: adjusted_gross >= nominal_gross for every film",
-        bool((adj.adjusted_gross >= adj.nominal_gross).all()),
-        "some adjusted < nominal (CPI multiplier should be >= 1)",
+        "chart2: pre-1980 films all adjust UP (adjusted > nominal)",
+        bool((old.adjusted_gross > old.nominal_gross).all()),
+        "an old film's ticket-price-adjusted gross is not above nominal",
     )
     top_adj = adj.iloc[0]
     check(
@@ -92,8 +96,8 @@ def main() -> int:
         f"got {top_adj.title!r}",
     )
     check(
-        "chart2: Gone with the Wind adjusted ~= $4.74B",
-        approx(float(top_adj.adjusted_gross), 4_740_125_273),
+        "chart2: Gone with the Wind adjusted ~= $1.90B (BOM ticket-price)",
+        approx(float(top_adj.adjusted_gross), 1_895_421_694),
         f"got {top_adj.adjusted_gross:,}",
     )
 
@@ -109,8 +113,8 @@ def main() -> int:
         f"got {top_fl.title!r}",
     )
     check(
-        "chart3: Crouching Tiger U.S. gross ~= $244M (CPI-U)",
-        approx(float(top_fl.domestic_gross), 244_100_021),
+        "chart3: Crouching Tiger U.S. gross ~= $128M (nominal)",
+        approx(float(top_fl.domestic_gross), 128_078_872),
         f"got {top_fl.domestic_gross:,}",
     )
     # This chart is defined by LANGUAGE (Box Office Mojo's Foreign Language list),
