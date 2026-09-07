@@ -6,17 +6,17 @@ Generated: 2026-09-07
 ### `rank_adjusted`
 - **Type**: `int32`
 - **Non-null**: 200 / 200 (100.0%)
-- **Description**: Rank by inflation-adjusted domestic gross (1 = highest).
+- **Description**: Rank by ticket-price-adjusted domestic gross (1 = highest).
 
 ### `title`
 - **Type**: `str`
 - **Non-null**: 200 / 200 (100.0%)
 - **Description**: Film title.
 
-### `adjusted_gross_bom`
+### `adjusted_gross`
 - **Type**: `int64`
 - **Non-null**: 200 / 200 (100.0%)
-- **Description**: Box Office Mojo's own ticket-price-adjusted gross (2022 $ base) - kept for reference only; NOT the published basis.
+- **Description**: Domestic (U.S. & Canada) lifetime gross, adjusted for ticket-price inflation via Box Office Mojo (estimated tickets x today's average ticket price) - an admissions basis (USD).
 
 ### `nominal_gross`
 - **Type**: `int64`
@@ -38,22 +38,17 @@ Generated: 2026-09-07
 - **Non-null**: 200 / 200 (100.0%)
 - **Description**: Release decade (release_year rounded down to the nearest 10).
 
-### `adjusted_gross`
-- **Type**: `int64`
-- **Non-null**: 200 / 200 (100.0%)
-- **Description**: Domestic (U.S. & Canada) lifetime gross restated in CONSTANT 2026 dollars using CPI-U (USD).
-
 ### `inflation_multiple`
 - **Type**: `float64`
 - **Non-null**: 200 / 200 (100.0%)
-- **Description**: adjusted_gross / nominal_gross - how many times its original take the CPI-U figure represents.
+- **Description**: adjusted_gross / nominal_gross - how many times its original take the adjusted figure represents.
 
 ## Notes
 
-Source: Box Office Mojo, Top Lifetime Grosses (domestic, US/Canada); nominal grosses restated to
-constant 2026 dollars using U.S. CPI-U (BLS series CPIAUCNS, via FRED), trailing-12-month base.
-URL: https://www.boxofficemojo.com/chart/top_lifetime_gross/
-Method: adjusted_gross = nominal_gross * CPI(2026 TTM base) / CPI(release year). This is GENERAL
-inflation (CPI-U), NOT Box Office Mojo's ticket-price adjustment (which only offers a 2022 base and
-no foreign version). adjusted_gross_bom is retained for reference but is not the published figure.
-Domestic only. Lifetime totals include re-release grosses, which inflates some classics.
+Source: Box Office Mojo, Top Lifetime Adjusted Grosses (domestic, US/Canada).
+URL: https://www.boxofficemojo.com/chart/top_lifetime_gross_adjusted/?adjust_gross_to=2022
+Method: adjusted_gross is Box Office Mojo's ticket-price adjustment - estimated tickets sold x a
+reference-year average ticket price, i.e. an ADMISSIONS basis (counts people through the door), the
+sound way to compare films across eras. NOT a CPI/general-inflation recalculation (a CPI version was
+tried and reverted because it overstates old films unevenly by era). Domestic only; lifetime totals
+include re-release grosses, which inflates some classics.

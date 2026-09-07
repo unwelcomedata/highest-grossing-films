@@ -13,15 +13,10 @@ Generated: 2026-09-07
 - **Non-null**: 100 / 100 (100.0%)
 - **Description**: Film title.
 
-### `domestic_gross_nominal`
-- **Type**: `int64`
-- **Non-null**: 100 / 100 (100.0%)
-- **Description**: U.S. & Canada lifetime gross in year-of-release dollars, as reported (USD).
-
 ### `domestic_gross`
 - **Type**: `int64`
 - **Non-null**: 100 / 100 (100.0%)
-- **Description**: U.S. & Canada lifetime gross restated in CONSTANT 2026 dollars using CPI-U (USD).
+- **Description**: U.S. & Canada lifetime gross in NOMINAL (year-of-release) dollars, as reported (USD).
 
 ### `release_year`
 - **Type**: `int32`
@@ -46,7 +41,7 @@ Generated: 2026-09-07
 ## Notes
 
 Source: Box Office Mojo, Foreign Language chart (non-English-language films),
-ranked by U.S. & Canada lifetime gross; country of origin joined from TMDB. Grosses restated to
-constant 2026 dollars using U.S. CPI-U (BLS CPIAUCNS via FRED), same basis as highest_grossing_films_v1.
-"Foreign" here means LANGUAGE (primary language not English), the cleanest available definition.
+ranked by U.S. & Canada lifetime gross; country of origin joined from TMDB. Grosses are NOMINAL
+(year-of-release dollars) - no reliable admissions/ticket-price adjustment exists for this list, so
+older titles are modestly understated. "Foreign" here means LANGUAGE (primary language not English).
 "This product uses the TMDB API but is not endorsed or certified by TMDB."

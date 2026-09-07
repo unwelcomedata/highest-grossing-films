@@ -13,14 +13,15 @@ part.
 - **Hollywood's biggest films make most of their money abroad.** For nearly every
   top U.S.-produced film, the rest-of-world box office dwarfs the home (U.S. &
   Canada) take. *Avatar* made $785M at home and **$2.1B** abroad.
-- **Adjust for inflation and the biggest domestic film is from 1939.** In constant
-  2026 dollars (CPI-U), *Gone with the Wind* still tops the domestic chart
-  (~$4.7B), ahead of *Snow White* (1937) and *Star Wars* (1977). Modern hits only
-  lead the *nominal* board.
-- **The foreign-language film that broke into the U.S. isn't a recent one.**
-  *Crouching Tiger, Hidden Dragon* (2000) still leads U.S. box office for a
-  non-English film (~$244M in today's dollars), ahead of *Life Is Beautiful*,
-  *Hero*, and *Parasite*.
+- **Adjust for ticket-price inflation and the biggest domestic film is from 1939.**
+  On an admissions basis (estimated tickets sold × today's ticket price),
+  *Gone with the Wind* still tops the domestic chart (~$1.9B), ahead of
+  *Star Wars* (1977) and *The Sound of Music* (1965). Modern hits only lead the
+  *nominal* board.
+- **The foreign-language film that broke furthest into the U.S. isn't recent.**
+  *Crouching Tiger, Hidden Dragon* (2000) leads U.S. box office for a non-English
+  film (~$128M), ahead of *Life Is Beautiful*, *Godzilla Minus One*, and
+  *Parasite*.
 
 > **A note on "domestic."** Box Office Mojo's "domestic" means the **U.S. &
 > Canada** market — which only equals a film's *home* market for U.S.-made films.
@@ -40,18 +41,19 @@ grows for the more internationally-dependent films.
 
 ## 2. The biggest *domestic* films, adjusted for inflation
 
-A different question: within the U.S. & Canada, once general inflation is
-accounted for, who sold the most? Every film's lifetime gross is restated in
-**constant 2026 dollars (CPI-U)**. The gold dot is what each film actually made
-at the time (nominal); the connector shows how far inflation moves it.
+A different question: within the U.S. & Canada, once ticket-price inflation is
+accounted for, who sold the most tickets? This uses Box Office Mojo's adjustment
+— estimated tickets sold × today's average ticket price, effectively an
+**admissions** ranking. The gold dot is what each film actually made at the time
+(nominal); the connector shows how far the adjustment moves it.
 
-![Domestic gross, today's dollars vs nominal](docs/01_domestic_adjusted_vs_nominal.png)
+![Domestic gross, adjusted vs nominal](docs/01_domestic_adjusted_vs_nominal.png)
 
 ## 3. The foreign-language films that broke into the U.S.
 
-Which non-English-language films earned the most in the U.S. & Canada, in constant
-2026 dollars. Country of origin is under each title — the list is more diverse than
-you'd guess (Hong Kong, Italy, China, France, South Korea, Mexico).
+Which non-English-language films earned the most in the U.S. & Canada, in nominal
+dollars. Country of origin is under each title — the list is more diverse than
+you'd guess (Hong Kong, Italy, Japan, China, South Korea, Mexico).
 
 ![Top foreign-language films by US box office](docs/03_foreign_language_us_gross.png)
 
@@ -63,16 +65,17 @@ you'd guess (Hong Kong, Italy, China, France, South Korea, Mexico).
   Office Mojo's worldwide lifetime chart. Domestic = U.S. & Canada; the rest is
   "abroad." Chart 1 shows *shares* of each film's own total, so inflation doesn't
   distort it.
-- **Inflation adjustment uses CPI-U, not ticket prices.** Charts 2 and 3 restate
-  each film's nominal lifetime gross into **constant 2026 dollars** using the
-  U.S. Consumer Price Index (CPI-U, all-items), on a trailing-12-month base. This
-  is *general* inflation — deliberately a single, consistent basis across both
-  charts. (It is **not** Box Office Mojo's own "ticket-price adjusted" figure,
-  which only offers a 2022 base and no foreign version, so the numbers here differ
-  from BOM's adjusted chart on purpose.)
+- **The domestic adjusted chart uses ticket-price inflation** (Box Office Mojo's
+  own adjustment): estimated tickets sold × a reference-year average ticket price.
+  This is effectively an **admissions** ranking — it counts people through the
+  door, which is the sound way to compare films across eras. (We tried a CPI-U
+  "general inflation" adjustment and dropped it: ticket prices have risen much
+  faster than general CPI, so CPI-adjusting old grosses overstates old films
+  unevenly by era. Admissions is the honest basis.)
 - **Foreign-language** (chart 3) means non-English-language films, from Box Office
-  Mojo's Foreign Language chart, ranked by U.S. & Canada lifetime gross. Country of
-  origin comes from TMDB.
+  Mojo's Foreign Language chart, ranked by U.S. & Canada lifetime gross in
+  **nominal** dollars (no reliable admissions adjustment exists for this list, so
+  older titles are modestly understated). Country of origin comes from TMDB.
 - **Re-releases** inflate the lifetime totals of some classics (*Gone with the
   Wind*, *Star Wars*, *E.T.* were re-released theatrically) — their totals reflect
   total historical audience, not one release.
@@ -90,8 +93,8 @@ Full per-source detail, definitions, and caveats are in [SOURCES.md](SOURCES.md)
 Published datasets are in [`export/`](export/), each with a `*_codebook.md`
 describing every column:
 
-- `highest_grossing_films_v1.csv` — top domestic films, adjusted to constant 2026
-  dollars (CPI-U) alongside nominal gross and release year.
+- `highest_grossing_films_v1.csv` — top domestic films, ticket-price adjusted gross
+  alongside nominal gross, estimated tickets, and release year.
 - `films_worldwide_v1.csv` — worldwide top films with the home / abroad split.
 - `films_foreign_us_v1.csv` — top foreign-language films by U.S. & Canada gross,
   with country of origin.
@@ -100,8 +103,8 @@ describing every column:
 
 ## Sources & license
 
-Box Office Mojo (domestic, worldwide, and foreign-language lifetime grosses), TMDB
-(country of origin), and U.S. CPI-U (via FRED) for inflation. Full attribution and
+Box Office Mojo (domestic lifetime + ticket-price adjusted, worldwide, and
+foreign-language grosses) and TMDB (country of origin). Full attribution and
 caveats in [SOURCES.md](SOURCES.md). "This product uses the TMDB API but is not
 endorsed or certified by TMDB." No crowd-edited sources are used.
 
