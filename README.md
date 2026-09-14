@@ -31,13 +31,15 @@ part.
 
 ---
 
+_Click any chart to open it at full resolution._
+
 ## 1. Hollywood's biggest films make most of their money abroad
 
 Top 15 U.S.-produced films by worldwide gross, ordered by the share earned
 abroad. Teal = rest of world, gold = home (U.S. & Canada) — the teal segment
 grows for the more internationally-dependent films.
 
-![Home vs abroad, top US films](docs/02_worldwide_domestic_vs_international.png)
+[![Home vs abroad, top US films](docs/02_worldwide_domestic_vs_international.png)](docs/02_worldwide_domestic_vs_international.png)
 
 ## 2. The biggest *domestic* films, adjusted for inflation
 
@@ -47,15 +49,17 @@ accounted for, who sold the most tickets? This uses Box Office Mojo's adjustment
 **admissions** ranking. The gold dot is what each film actually made at the time
 (nominal); the connector shows how far the adjustment moves it.
 
-![Domestic gross, adjusted vs nominal](docs/01_domestic_adjusted_vs_nominal.png)
+[![Domestic gross, adjusted vs nominal](docs/01_domestic_adjusted_vs_nominal.png)](docs/01_domestic_adjusted_vs_nominal.png)
 
 ## 3. The foreign-language films that broke into the U.S.
 
 Which non-English-language films earned the most in the U.S. & Canada, in nominal
-dollars. Country of origin is under each title — the list is more diverse than
-you'd guess (Hong Kong, Italy, Japan, China, South Korea, Mexico).
+(year-of-release) dollars — there's no reliable admissions adjustment for this
+list, so older titles are modestly understated. Country of origin is under each
+title — the list is more diverse than you'd guess (Hong Kong, Italy, Japan,
+China, South Korea, Mexico).
 
-![Top foreign-language films by US box office](docs/03_foreign_language_us_gross.png)
+[![Top foreign-language films by US box office](docs/03_foreign_language_us_gross.png)](docs/03_foreign_language_us_gross.png)
 
 ---
 
