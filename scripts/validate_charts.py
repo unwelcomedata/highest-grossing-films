@@ -183,6 +183,26 @@ def main() -> int:
 
     con.close()
 
+    # ── Social vs web chart parity (when rendered outputs are present) ────
+    # Each published chart must exist in BOTH the social set (outputs/social,
+    # for Bluesky/X) and the web set (outputs/web, for the project page), and the
+    # web charts must be the wider web canvas. Skipped on a fresh checkout where
+    # outputs/ (gitignored) hasn't been regenerated.
+    social = sorted((PROJECT / "outputs" / "social").glob("*.png"))
+    web_dir = PROJECT / "outputs" / "web"
+    if social and web_dir.exists():
+        s_names = {p.name for p in social}
+        w_names = {p.name for p in web_dir.glob("*.png")}
+        check("social and web sets cover the same filenames", s_names == w_names,
+              f"only social: {sorted(s_names - w_names)}; only web: {sorted(w_names - s_names)}")
+        try:
+            from PIL import Image
+            dims = {Image.open(p).size for p in web_dir.glob("*.png")}
+            check("every web chart is the web canvas 1664x936", dims == {(1664, 936)},
+                  f"unexpected: {sorted(dims)}")
+        except ImportError:
+            pass
+
     # ── Report ────────────────────────────────────────────────────────────
     print("Pre-publish chart-data validation — highest-grossing-films")
     print("=" * 60)
