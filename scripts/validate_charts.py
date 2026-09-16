@@ -2,7 +2,7 @@
 """Pre-publish validation — re-check the chart data before anything goes public.
 
 Run this BEFORE curating the release branch / flipping the repo public. It
-re-derives what each of the three published charts should show, straight from
+re-derives what each of the four published charts should show, straight from
 the DuckDB source tables, and confirms:
 
   1. The published export CSVs (export/*_v1.csv) match the DuckDB source tables
@@ -134,6 +134,62 @@ def main() -> int:
         "chart3: displayed top 15 are predominantly non-U.S. origin",
         us_share_top15 <= 0.2,
         f"{us_share_top15:.0%} of the top 15 are US-origin (expected mostly non-US)",
+    )
+
+    # ── Chart 4 — top-10 domestic vs top-10 international (by genre) ───────
+    # Two INDEPENDENT top-10 lists over U.S.-produced films, each ranked by its
+    # own measure. Re-derive both exactly as the notebook does and assert the
+    # headline facts + list membership the chart depends on. No new export CSV
+    # (this chart reuses films_worldwide + films_genre), so this is fact-only.
+    def _top10(measure: str) -> pd.DataFrame:
+        return con.execute(f"""
+            WITH us AS (SELECT title, release_year FROM films_genre WHERE is_us=TRUE)
+            SELECT w.title, g.primary_genre, w.{measure} AS value
+            FROM films_worldwide w
+            JOIN us ON us.title=w.title AND us.release_year=w.release_year
+            JOIN films_genre g ON g.title=w.title AND g.release_year=w.release_year
+            ORDER BY w.{measure} DESC LIMIT 10""").df()
+
+    dom10 = _top10("domestic_gross")
+    intl10 = _top10("foreign_gross")
+    check("chart4: domestic top-10 has 10 rows", len(dom10) == 10, f"got {len(dom10)}")
+    check("chart4: international top-10 has 10 rows", len(intl10) == 10, f"got {len(intl10)}")
+    check(
+        "chart4: top domestic film is Star Wars: The Force Awakens (~$937M)",
+        dom10.iloc[0].title == "Star Wars: Episode VII - The Force Awakens"
+        and approx(float(dom10.iloc[0].value), 936_662_225),
+        f"got {dom10.iloc[0].title!r} @ {dom10.iloc[0].value:,}",
+    )
+    check(
+        "chart4: top international film is Avatar (~$2.14B)",
+        intl10.iloc[0].title == "Avatar" and approx(float(intl10.iloc[0].value), 2_138_489_059),
+        f"got {intl10.iloc[0].title!r} @ {intl10.iloc[0].value:,}",
+    )
+    # The story is the DIFFERENCE between the two lists — lock in the membership
+    # split so a data shift that quietly merges the lists gets caught.
+    dset, iset = set(dom10.title), set(intl10.title)
+    dom_only = dset - iset
+    intl_only = iset - dset
+    check(
+        "chart4: domestic-only films are exactly {Black Panther, Top Gun: Maverick, No Way Home}",
+        dom_only == {"Black Panther", "Top Gun: Maverick", "Spider-Man: No Way Home"},
+        f"got {sorted(dom_only)}",
+    )
+    check(
+        "chart4: international-only films are exactly {Furious 7, The Lion King, Zootopia 2}",
+        intl_only == {"Furious 7", "The Lion King", "Zootopia 2"},
+        f"got {sorted(intl_only)}",
+    )
+    check(
+        "chart4: shared scale is honest — top domestic < smallest international bar",
+        float(dom10.value.max()) < float(intl10.value.min()),
+        f"top domestic {dom10.value.max():,} vs min international {intl10.value.min():,}",
+    )
+    # Every displayed film must have a genre (drives the color); no nulls.
+    check(
+        "chart4: all displayed films have a primary_genre",
+        not dom10.primary_genre.isna().any() and not intl10.primary_genre.isna().any(),
+        "a displayed film has no genre",
     )
 
     # ── Published CSVs match the DuckDB source (no drift) ─────────────────
