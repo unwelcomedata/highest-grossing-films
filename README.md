@@ -1,5 +1,7 @@
 **[@unwelcomedata](https://github.com/unwelcomedata)** · data from public sources
 
+Follow for new charts: [X](https://x.com/unwelcomedata) · [Bluesky](https://bsky.app/profile/unwelcomedata.bsky.social)
+
 # Highest-Grossing Films: it depends entirely on how you count
 
 Ask which films are the biggest ever and you get different answers depending on
