@@ -4,7 +4,7 @@
 
 - **Publisher:** Box Office Mojo (an IMDb / Amazon company).
 - **URL:** https://www.boxofficemojo.com/chart/top_lifetime_gross_adjusted/?adjust_gross_to=2022
-- **Retrieved:** 2026-09-06
+- **Retrieved:** 2026-09-18
 - **Coverage:** Top domestic (U.S. & Canada) lifetime grosses, with Box Office
   Mojo's ticket-price adjustment.
 - **Fields used:** rank, title, adjusted ("Adj. Lifetime") gross, nominal
@@ -64,7 +64,7 @@ transformed analytical table, credited to the source above.
 
 - **Publisher:** Box Office Mojo (IMDb / Amazon).
 - **URL:** https://www.boxofficemojo.com/chart/ww_top_lifetime_gross/
-- **Retrieved:** 2026-09-06
+- **Retrieved:** 2026-09-18
 - **Coverage:** Top films by worldwide lifetime gross.
 - **Fields used:** rank, title, worldwide / domestic / foreign lifetime gross,
   domestic %, foreign %, release year.
@@ -87,7 +87,7 @@ foreign = everywhere else.** Lifetime totals include all theatrical runs.
   Warrior 2*) can post enormous worldwide totals with near-zero domestic gross —
   a real signal, not an error. They are excluded from chart 1 because "domestic"
   (U.S. & Canada) is not their home market.
-- **Figures are a snapshot as of the retrieval date (2026-09-06).** Films still in
+- **Figures are a snapshot as of the retrieval date (2026-09-18).** Films still in
   theatrical release when the data was pulled (e.g. 2026 titles like *Spider-Man:
   Brand New Day* and *The Odyssey*) have **incomplete lifetime totals that will
   keep climbing**. Any chart or post carries an "as-of Sep 2026" note, and
@@ -99,7 +99,7 @@ foreign = everywhere else.** Lifetime totals include all theatrical runs.
 
 - **Publisher:** Box Office Mojo (IMDb / Amazon).
 - **URL:** https://www.boxofficemojo.com/genre/sg4208980225/
-- **Retrieved:** 2026-09-06
+- **Retrieved:** 2026-09-18
 - **Coverage:** Non-English-language films by U.S. & Canada (domestic) lifetime
   gross.
 - **Fields used:** title, domestic lifetime gross, release year.
@@ -126,7 +126,7 @@ foreign = everywhere else.** Lifetime totals include all theatrical runs.
 ## TMDB (The Movie Database) — country of origin
 
 - **Publisher:** TMDB, https://www.themoviedb.org/
-- **Retrieved:** 2026-09-06
+- **Retrieved:** 2026-09-18
 - **Use:** **country of origin** per film, matched by title + release year. Two
   roles: (1) the derived `is_us` flag restricts chart 1 (home vs abroad) to
   U.S.-produced films so "home" means the same market for every film; (2) the

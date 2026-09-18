@@ -154,10 +154,15 @@ def main() -> int:
     intl10 = _top10("foreign_gross")
     check("chart4: domestic top-10 has 10 rows", len(dom10) == 10, f"got {len(dom10)}")
     check("chart4: international top-10 has 10 rows", len(intl10) == 10, f"got {len(intl10)}")
+    # Spider-Man: Brand New Day (2026) is STILL IN THEATRICAL RELEASE, so its
+    # domestic gross keeps climbing between refreshes. Assert the title (the
+    # story-relevant fact) firmly, but treat the dollar figure as a LOWER BOUND
+    # (>= last observed ~$937M) rather than a pinned value, so a normal upward
+    # data refresh doesn't trip this check. Re-pin if it ever leaves #1.
     check(
-        "chart4: top domestic film is Star Wars: The Force Awakens (~$937M)",
-        dom10.iloc[0].title == "Star Wars: Episode VII - The Force Awakens"
-        and approx(float(dom10.iloc[0].value), 936_662_225),
+        "chart4: top domestic film is Spider-Man: Brand New Day (>= ~$937M, in release)",
+        dom10.iloc[0].title == "Spider-Man: Brand New Day"
+        and float(dom10.iloc[0].value) >= 937_441_963 * 0.995,
         f"got {dom10.iloc[0].title!r} @ {dom10.iloc[0].value:,}",
     )
     check(
