@@ -63,6 +63,24 @@ China, South Korea, Mexico).
 
 [![Top foreign-language films by US box office](docs/03_foreign_language_us_gross.png)](docs/03_foreign_language_us_gross.png)
 
+## 4. Top 10 at home vs. top 10 abroad — two different lists
+
+Two **independent top-10 lists** of U.S.-produced films: the left panel ranks the
+10 highest by **domestic (U.S. & Canada) gross**, the right ranks the 10 highest by
+**international gross**. Because they're separate rankings, the story is *who makes
+one list but not the other*. Three films are **domestic-only** top-10 —
+*Top Gun: Maverick*, *Black Panther*, *Spider-Man: No Way Home* (home favorites) —
+while three are **international-only** — *Furious 7*, *The Lion King*, *Zootopia 2*
+(global travelers). At the top of the domestic list, **Spider-Man: Brand New Day
+(2026) is now the highest-grossing domestic film of all time (~$937M)**, having just
+edged past *Star Wars: The Force Awakens* — though it's still in theaters, so that
+figure is a lower bound. Both panels share one dollar scale (values in nominal
+year-of-release dollars), so the size gap is honest: even the biggest domestic
+performer sits below almost the entire international board, which runs past $2B. Each
+bar is colored by the film's primary genre (see legend).
+
+[![Top 10 films domestic vs international, colored by genre](docs/04_domestic_vs_international_by_genre.png)](docs/04_domestic_vs_international_by_genre.png)
+
 ---
 
 ## How it was measured
