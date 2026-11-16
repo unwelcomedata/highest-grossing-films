@@ -33,6 +33,10 @@ part.
 
 ---
 
+[![Highest-grossing films — infographic](docs/infographic_films.png)](docs/infographic_films.png)
+
+---
+
 _Click any chart to open it at full resolution._
 
 ## 1. Hollywood's biggest films make most of their money abroad
