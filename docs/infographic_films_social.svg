@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- highest-grossing-films infographic (landscape social 1600x900). Same computed values as the tall render. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" font-family="Helvetica, Arial, sans-serif">
+<rect width="1600" height="900" fill="#FBF8F0"/>
+<rect x="0" y="0" width="1600" height="188" fill="#003049"/>
+<text x="80.0" y="82.0" fill="#FFFFFF" font-size="52" font-weight="bold">Highest-Grossing Films</text>
+<text x="80.0" y="128.0" fill="#94D2BD" font-size="30" font-weight="bold">It depends on how you count</text>
+<text x="80.0" y="162.0" fill="#E9D8A6" font-size="19">Box office through four lenses: worldwide, ticket-price adjusted, foreign-language, domestic vs. international.</text>
+<line x1="800" y1="205" x2="800" y2="795" stroke="#E9D8A6" stroke-width="3"/>
+<line x1="80" y1="500" x2="780" y2="500" stroke="#E9D8A6" stroke-width="3"/>
+<line x1="820" y1="500" x2="1520" y2="500" stroke="#E9D8A6" stroke-width="3"/>
+<text x="80.0" y="230.0" fill="#003049" font-size="25" font-weight="bold">Top 10 worldwide: home vs abroad</text>
+<text x="80.0" y="256.0" fill="#6B7280" font-size="16">Bar = worldwide gross; split = home vs. abroad.</text>
+<text x="698.6" y="256.0" fill="#6B7280" font-size="15">International</text>
+<rect x="679.6" y="243.0" width="13" height="13" fill="#EE9B00"/>
+<text x="575.8" y="256.0" fill="#6B7280" font-size="15">U.S./Canada</text>
+<rect x="556.8" y="243.0" width="13" height="13" fill="#005F73"/>
+<text x="80.0" y="277.0" fill="#1F2937" font-size="15">Avatar</text>
+<rect x="290.0" y="267.0" width="84.60" height="14" fill="#005F73" data-sec="ww" data-key="Avatar" data-series="domestic" data-val="785221649" data-max="2923710708" data-track="315"/><!-- Avatar domestic 785,221,649 / 2,923,710,708 x 315 -> 84.60 -->
+<rect x="374.6" y="267.0" width="230.40" height="14" fill="#EE9B00" data-sec="ww" data-key="Avatar" data-series="international" data-val="2138489059" data-max="2923710708" data-track="315"/><!-- Avatar international 2,138,489,059 / 2,923,710,708 x 315 -> 230.40 -->
+<text x="800.0" y="277.0" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.92B &#183; 26.9% U.S.</text>
+<text x="80.0" y="298.5" fill="#1F2937" font-size="15">Avengers: Endgame</text>
+<rect x="290.0" y="288.5" width="92.48" height="14" fill="#005F73" data-sec="ww" data-key="Avengers: Endgame" data-series="domestic" data-val="858373000" data-max="2923710708" data-track="315"/><!-- Avengers: Endgame domestic 858,373,000 / 2,923,710,708 x 315 -> 92.48 -->
+<rect x="382.5" y="288.5" width="209.13" height="14" fill="#EE9B00" data-sec="ww" data-key="Avengers: Endgame" data-series="international" data-val="1941066100" data-max="2923710708" data-track="315"/><!-- Avengers: Endgame international 1,941,066,100 / 2,923,710,708 x 315 -> 209.13 -->
+<text x="800.0" y="298.5" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.80B &#183; 30.7% U.S.</text>
+<text x="80.0" y="320.0" fill="#1F2937" font-size="15">Spider-Man: Brand New Day</text>
+<rect x="290.0" y="310.0" width="101.00" height="14" fill="#005F73" data-sec="ww" data-key="Spider-Man: Brand New Day" data-series="domestic" data-val="937441963" data-max="2923710708" data-track="315"/><!-- Spider-Man: Brand New Day domestic 937,441,963 / 2,923,710,708 x 315 -> 101.00 -->
+<rect x="391.0" y="310.0" width="163.36" height="14" fill="#EE9B00" data-sec="ww" data-key="Spider-Man: Brand New Day" data-series="international" data-val="1516250953" data-max="2923710708" data-track="315"/><!-- Spider-Man: Brand New Day international 1,516,250,953 / 2,923,710,708 x 315 -> 163.36 -->
+<text x="800.0" y="320.0" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.45B &#183; 38.2% U.S.</text>
+<text x="80.0" y="341.5" fill="#1F2937" font-size="15">Avatar: Way of Water</text>
+<rect x="290.0" y="331.5" width="74.17" height="14" fill="#005F73" data-sec="ww" data-key="Avatar: The Way of Water" data-series="domestic" data-val="688459501" data-max="2923710708" data-track="315"/><!-- Avatar: The Way of Water domestic 688,459,501 / 2,923,710,708 x 315 -> 74.17 -->
+<rect x="364.2" y="331.5" width="177.34" height="14" fill="#EE9B00" data-sec="ww" data-key="Avatar: The Way of Water" data-series="international" data-val="1646025119" data-max="2923710708" data-track="315"/><!-- Avatar: The Way of Water international 1,646,025,119 / 2,923,710,708 x 315 -> 177.34 -->
+<text x="800.0" y="341.5" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.33B &#183; 29.5% U.S.</text>
+<text x="80.0" y="363.0" fill="#1F2937" font-size="15">Ne Zha 2</text>
+<rect x="290.0" y="353.0" width="2.51" height="14" fill="#005F73" data-sec="ww" data-key="Ne Zha 2" data-series="domestic" data-val="23308176" data-max="2923710708" data-track="315"/><!-- Ne Zha 2 domestic 23,308,176 / 2,923,710,708 x 315 -> 2.51 -->
+<rect x="292.5" y="353.0" width="242.13" height="14" fill="#EE9B00" data-sec="ww" data-key="Ne Zha 2" data-series="international" data-val="2247392194" data-max="2923710708" data-track="315"/><!-- Ne Zha 2 international 2,247,392,194 / 2,923,710,708 x 315 -> 242.13 -->
+<text x="800.0" y="363.0" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.27B &#183; 1.0% U.S.</text>
+<text x="80.0" y="384.5" fill="#1F2937" font-size="15">Titanic</text>
+<rect x="290.0" y="374.5" width="72.65" height="14" fill="#005F73" data-sec="ww" data-key="Titanic" data-series="domestic" data-val="674354882" data-max="2923710708" data-track="315"/><!-- Titanic domestic 674,354,882 / 2,923,710,708 x 315 -> 72.65 -->
+<rect x="362.7" y="374.5" width="171.36" height="14" fill="#EE9B00" data-sec="ww" data-key="Titanic" data-series="international" data-val="1590458086" data-max="2923710708" data-track="315"/><!-- Titanic international 1,590,458,086 / 2,923,710,708 x 315 -> 171.36 -->
+<text x="800.0" y="384.5" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.26B &#183; 29.8% U.S.</text>
+<text x="80.0" y="406.0" fill="#1F2937" font-size="15">Star Wars: Force Awakens</text>
+<rect x="290.0" y="396.0" width="100.92" height="14" fill="#005F73" data-sec="ww" data-key="Star Wars: Episode VII - The Force Awakens" data-series="domestic" data-val="936662225" data-max="2923710708" data-track="315"/><!-- Star Wars: Episode VII - The Force Awakens domestic 936,662,225 / 2,923,710,708 x 315 -> 100.92 -->
+<rect x="390.9" y="396.0" width="122.25" height="14" fill="#EE9B00" data-sec="ww" data-key="Star Wars: Episode VII - The Force Awakens" data-series="international" data-val="1134647993" data-max="2923710708" data-track="315"/><!-- Star Wars: Episode VII - The Force Awakens international 1,134,647,993 / 2,923,710,708 x 315 -> 122.25 -->
+<text x="800.0" y="406.0" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.07B &#183; 45.2% U.S.</text>
+<text x="80.0" y="427.5" fill="#1F2937" font-size="15">Avengers: Infinity War</text>
+<rect x="290.0" y="417.5" width="73.14" height="14" fill="#005F73" data-sec="ww" data-key="Avengers: Infinity War" data-series="domestic" data-val="678815482" data-max="2923710708" data-track="315"/><!-- Avengers: Infinity War domestic 678,815,482 / 2,923,710,708 x 315 -> 73.14 -->
+<rect x="363.1" y="417.5" width="147.99" height="14" fill="#EE9B00" data-sec="ww" data-key="Avengers: Infinity War" data-series="international" data-val="1373599557" data-max="2923710708" data-track="315"/><!-- Avengers: Infinity War international 1,373,599,557 / 2,923,710,708 x 315 -> 147.99 -->
+<text x="800.0" y="427.5" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$2.05B &#183; 33.1% U.S.</text>
+<text x="80.0" y="449.0" fill="#1F2937" font-size="15">Spider-Man: No Way Home</text>
+<rect x="290.0" y="439.0" width="87.79" height="14" fill="#005F73" data-sec="ww" data-key="Spider-Man: No Way Home" data-series="domestic" data-val="814866759" data-max="2923710708" data-track="315"/><!-- Spider-Man: No Way Home domestic 814,866,759 / 2,923,710,708 x 315 -> 87.79 -->
+<rect x="377.8" y="439.0" width="119.22" height="14" fill="#EE9B00" data-sec="ww" data-key="Spider-Man: No Way Home" data-series="international" data-val="1106559314" data-max="2923710708" data-track="315"/><!-- Spider-Man: No Way Home international 1,106,559,314 / 2,923,710,708 x 315 -> 119.22 -->
+<text x="800.0" y="449.0" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$1.92B &#183; 42.4% U.S.</text>
+<text x="80.0" y="470.5" fill="#1F2937" font-size="15">Zootopia 2</text>
+<rect x="290.0" y="460.5" width="46.13" height="14" fill="#005F73" data-sec="ww" data-key="Zootopia 2" data-series="domestic" data-val="428130160" data-max="2923710708" data-track="315"/><!-- Zootopia 2 domestic 428,130,160 / 2,923,710,708 x 315 -> 46.13 -->
+<rect x="336.1" y="460.5" width="154.99" height="14" fill="#EE9B00" data-sec="ww" data-key="Zootopia 2" data-series="international" data-val="1438517790" data-max="2923710708" data-track="315"/><!-- Zootopia 2 international 1,438,517,790 / 2,923,710,708 x 315 -> 154.99 -->
+<text x="800.0" y="470.5" fill="#003049" font-size="14" font-weight="bold" text-anchor="end">$1.87B &#183; 22.9% U.S.</text>
+<text x="820.0" y="230.0" fill="#003049" font-size="25" font-weight="bold">Foreign-language films by U.S. gross</text>
+<text x="820.0" y="256.0" fill="#6B7280" font-size="16">Top 10 U.S. gross (nominal $), with country of origin.</text>
+<text x="820.0" y="277.0" fill="#1F2937" font-size="15">Crouching Tiger, Hidden Dragon</text>
+<rect x="1060.0" y="267.0" width="225.00" height="14" fill="#0A9396" data-sec="fl" data-key="Crouching Tiger, Hidden Dragon" data-series="us_gross" data-val="128078872" data-max="128078872" data-track="225"/><!-- Crouching Tiger, Hidden Dragon us_gross 128,078,872 / 128,078,872 x 225 -> 225.00 -->
+<text x="1293.0" y="277.0" fill="#003049" font-size="13" font-weight="bold">$128.1M &#183; Hong Kong</text>
+<text x="820.0" y="298.5" fill="#1F2937" font-size="15">Life Is Beautiful</text>
+<rect x="1060.0" y="288.5" width="100.57" height="14" fill="#0A9396" data-sec="fl" data-key="Life Is Beautiful" data-series="us_gross" data-val="57247384" data-max="128078872" data-track="225"/><!-- Life Is Beautiful us_gross 57,247,384 / 128,078,872 x 225 -> 100.57 -->
+<text x="1168.6" y="298.5" fill="#003049" font-size="13" font-weight="bold">$57.2M &#183; Italy</text>
+<text x="820.0" y="320.0" fill="#1F2937" font-size="15">Godzilla Minus One</text>
+<rect x="1060.0" y="310.0" width="100.39" height="14" fill="#0A9396" data-sec="fl" data-key="Godzilla Minus One" data-series="us_gross" data-val="57144669" data-max="128078872" data-track="225"/><!-- Godzilla Minus One us_gross 57,144,669 / 128,078,872 x 225 -> 100.39 -->
+<text x="1168.4" y="320.0" fill="#003049" font-size="13" font-weight="bold">$57.1M &#183; Japan</text>
+<text x="820.0" y="341.5" fill="#1F2937" font-size="15">Hero</text>
+<rect x="1060.0" y="331.5" width="94.35" height="14" fill="#0A9396" data-sec="fl" data-key="Hero" data-series="us_gross" data-val="53710019" data-max="128078872" data-track="225"/><!-- Hero us_gross 53,710,019 / 128,078,872 x 225 -> 94.35 -->
+<text x="1162.4" y="341.5" fill="#003049" font-size="13" font-weight="bold">$53.7M &#183; China</text>
+<text x="820.0" y="363.0" fill="#1F2937" font-size="15">Parasite</text>
+<rect x="1060.0" y="353.0" width="93.76" height="14" fill="#0A9396" data-sec="fl" data-key="Parasite" data-series="us_gross" data-val="53369749" data-max="128078872" data-track="225"/><!-- Parasite us_gross 53,369,749 / 128,078,872 x 225 -> 93.76 -->
+<text x="1161.8" y="363.0" fill="#003049" font-size="13" font-weight="bold">$53.4M &#183; South Korea</text>
+<text x="820.0" y="384.5" fill="#1F2937" font-size="15">Instructions Not Included</text>
+<rect x="1060.0" y="374.5" width="78.12" height="14" fill="#0A9396" data-sec="fl" data-key="Instructions Not Included" data-series="us_gross" data-val="44467206" data-max="128078872" data-track="225"/><!-- Instructions Not Included us_gross 44,467,206 / 128,078,872 x 225 -> 78.12 -->
+<text x="1146.1" y="384.5" fill="#003049" font-size="13" font-weight="bold">$44.5M &#183; Mexico</text>
+<text x="820.0" y="406.0" fill="#1F2937" font-size="15">Pan&#x27;s Labyrinth</text>
+<rect x="1060.0" y="396.0" width="66.11" height="14" fill="#0A9396" data-sec="fl" data-key="Pan&#x27;s Labyrinth" data-series="us_gross" data-val="37634615" data-max="128078872" data-track="225"/><!-- Pan&#x27;s Labyrinth us_gross 37,634,615 / 128,078,872 x 225 -> 66.11 -->
+<text x="1134.1" y="406.0" fill="#003049" font-size="13" font-weight="bold">$37.6M &#183; Mexico</text>
+<text x="820.0" y="427.5" fill="#1F2937" font-size="15">Amélie</text>
+<rect x="1060.0" y="417.5" width="58.37" height="14" fill="#0A9396" data-sec="fl" data-key="Amélie" data-series="us_gross" data-val="33225499" data-max="128078872" data-track="225"/><!-- Amélie us_gross 33,225,499 / 128,078,872 x 225 -> 58.37 -->
+<text x="1126.4" y="427.5" fill="#003049" font-size="13" font-weight="bold">$33.2M &#183; France</text>
+<text x="820.0" y="449.0" fill="#1F2937" font-size="15">Fearless</text>
+<rect x="1060.0" y="439.0" width="43.27" height="14" fill="#0A9396" data-sec="fl" data-key="Fearless" data-series="us_gross" data-val="24633730" data-max="128078872" data-track="225"/><!-- Fearless us_gross 24,633,730 / 128,078,872 x 225 -> 43.27 -->
+<text x="1111.3" y="449.0" fill="#003049" font-size="13" font-weight="bold">$24.6M &#183; China</text>
+<text x="820.0" y="470.5" fill="#1F2937" font-size="15">Ne Zha 2</text>
+<rect x="1060.0" y="460.5" width="40.95" height="14" fill="#EE9B00" data-sec="fl" data-key="Ne Zha 2" data-series="us_gross" data-val="23308176" data-max="128078872" data-track="225"/><!-- Ne Zha 2 us_gross 23,308,176 / 128,078,872 x 225 -> 40.95 -->
+<text x="1108.9" y="470.5" fill="#003049" font-size="13" font-weight="bold">$23.3M &#183; China</text>
+<text x="1242.4" y="470.5" fill="#EE9B00" font-size="12" font-weight="bold">also #5 worldwide</text>
+<text x="80.0" y="537.0" fill="#003049" font-size="25" font-weight="bold">Domestic gross: as released vs. ticket-price adjusted</text>
+<text x="80.0" y="563.0" fill="#6B7280" font-size="16">U.S./Canada lifetime; right = adjusted / released.</text>
+<text x="636.2" y="563.0" fill="#6B7280" font-size="15">Ticket-price adjusted</text>
+<rect x="617.2" y="550.0" width="13" height="13" fill="#005F73"/>
+<text x="513.4" y="563.0" fill="#6B7280" font-size="15">As released</text>
+<rect x="494.4" y="550.0" width="13" height="13" fill="#9CA3AF"/>
+<text x="80.0" y="593.0" fill="#1F2937" font-size="15">Gone with the Wind</text>
+<rect x="290.0" y="574.0" width="31.79" height="16" fill="#9CA3AF" data-sec="adj" data-key="Gone with the Wind" data-series="nominal" data-val="200882193" data-max="1895421694" data-track="300"/><!-- Gone with the Wind nominal 200,882,193 / 1,895,421,694 x 300 -> 31.79 -->
+<rect x="290.0" y="593.0" width="300.00" height="16" fill="#005F73" data-sec="adj" data-key="Gone with the Wind" data-series="adjusted" data-val="1895421694" data-max="1895421694" data-track="300"/><!-- Gone with the Wind adjusted 1,895,421,694 / 1,895,421,694 x 300 -> 300.00 -->
+<text x="329.8" y="588.0" fill="#6B7280" font-size="12">$200.9M</text>
+<text x="598.0" y="607.0" fill="#003049" font-size="12" font-weight="bold">$1.90B</text>
+<text x="800.0" y="598.0" fill="#005F73" font-size="19" font-weight="bold" text-anchor="end">9.4&#215;</text>
+<text x="80.0" y="630.5" fill="#1F2937" font-size="15">Star Wars: A New Hope</text>
+<rect x="290.0" y="611.5" width="72.97" height="16" fill="#9CA3AF" data-sec="adj" data-key="Star Wars: Episode IV - A New Hope" data-series="nominal" data-val="460998507" data-max="1895421694" data-track="300"/><!-- Star Wars: Episode IV - A New Hope nominal 460,998,507 / 1,895,421,694 x 300 -> 72.97 -->
+<rect x="290.0" y="630.5" width="264.16" height="16" fill="#005F73" data-sec="adj" data-key="Star Wars: Episode IV - A New Hope" data-series="adjusted" data-val="1668979715" data-max="1895421694" data-track="300"/><!-- Star Wars: Episode IV - A New Hope adjusted 1,668,979,715 / 1,895,421,694 x 300 -> 264.16 -->
+<text x="371.0" y="625.5" fill="#6B7280" font-size="12">$461.0M</text>
+<text x="562.2" y="644.5" fill="#003049" font-size="12" font-weight="bold">$1.67B</text>
+<text x="800.0" y="635.5" fill="#005F73" font-size="19" font-weight="bold" text-anchor="end">3.6&#215;</text>
+<text x="80.0" y="668.0" fill="#1F2937" font-size="15">The Sound of Music</text>
+<rect x="290.0" y="649.0" width="25.46" height="16" fill="#9CA3AF" data-sec="adj" data-key="The Sound of Music" data-series="nominal" data-val="160888776" data-max="1895421694" data-track="300"/><!-- The Sound of Music nominal 160,888,776 / 1,895,421,694 x 300 -> 25.46 -->
+<rect x="290.0" y="668.0" width="211.31" height="16" fill="#005F73" data-sec="adj" data-key="The Sound of Music" data-series="adjusted" data-val="1335086324" data-max="1895421694" data-track="300"/><!-- The Sound of Music adjusted 1,335,086,324 / 1,895,421,694 x 300 -> 211.31 -->
+<text x="323.5" y="663.0" fill="#6B7280" font-size="12">$160.9M</text>
+<text x="509.3" y="682.0" fill="#003049" font-size="12" font-weight="bold">$1.34B</text>
+<text x="800.0" y="673.0" fill="#005F73" font-size="19" font-weight="bold" text-anchor="end">8.3&#215;</text>
+<text x="80.0" y="705.5" fill="#1F2937" font-size="15">E.T. the Extra-Terrestrial</text>
+<rect x="290.0" y="686.5" width="69.56" height="16" fill="#9CA3AF" data-sec="adj" data-key="E.T. the Extra-Terrestrial" data-series="nominal" data-val="439454989" data-max="1895421694" data-track="300"/><!-- E.T. the Extra-Terrestrial nominal 439,454,989 / 1,895,421,694 x 300 -> 69.56 -->
+<rect x="290.0" y="705.5" width="210.38" height="16" fill="#005F73" data-sec="adj" data-key="E.T. the Extra-Terrestrial" data-series="adjusted" data-val="1329174791" data-max="1895421694" data-track="300"/><!-- E.T. the Extra-Terrestrial adjusted 1,329,174,791 / 1,895,421,694 x 300 -> 210.38 -->
+<text x="367.6" y="700.5" fill="#6B7280" font-size="12">$439.5M</text>
+<text x="508.4" y="719.5" fill="#003049" font-size="12" font-weight="bold">$1.33B</text>
+<text x="800.0" y="710.5" fill="#005F73" font-size="19" font-weight="bold" text-anchor="end">3.0&#215;</text>
+<text x="80.0" y="743.0" fill="#1F2937" font-size="15">Titanic</text>
+<rect x="290.0" y="724.0" width="106.73" height="16" fill="#9CA3AF" data-sec="adj" data-key="Titanic" data-series="nominal" data-val="674354882" data-max="1895421694" data-track="300"/><!-- Titanic nominal 674,354,882 / 1,895,421,694 x 300 -> 106.73 -->
+<rect x="290.0" y="743.0" width="201.03" height="16" fill="#005F73" data-sec="adj" data-key="Titanic" data-series="adjusted" data-val="1270101626" data-max="1895421694" data-track="300"/><!-- Titanic adjusted 1,270,101,626 / 1,895,421,694 x 300 -> 201.03 -->
+<text x="404.7" y="738.0" fill="#6B7280" font-size="12">$674.4M</text>
+<text x="499.0" y="757.0" fill="#003049" font-size="12" font-weight="bold">$1.27B</text>
+<text x="800.0" y="748.0" fill="#005F73" font-size="19" font-weight="bold" text-anchor="end">1.9&#215;</text>
+<text x="80.0" y="780.5" fill="#1F2937" font-size="15">The Ten Commandments</text>
+<rect x="290.0" y="761.5" width="10.37" height="16" fill="#9CA3AF" data-sec="adj" data-key="The Ten Commandments" data-series="nominal" data-val="65500000" data-max="1895421694" data-track="300"/><!-- The Ten Commandments nominal 65,500,000 / 1,895,421,694 x 300 -> 10.37 -->
+<rect x="290.0" y="780.5" width="194.28" height="16" fill="#005F73" data-sec="adj" data-key="The Ten Commandments" data-series="adjusted" data-val="1227470000" data-max="1895421694" data-track="300"/><!-- The Ten Commandments adjusted 1,227,470,000 / 1,895,421,694 x 300 -> 194.28 -->
+<text x="308.4" y="775.5" fill="#6B7280" font-size="12">$65.5M</text>
+<text x="492.3" y="794.5" fill="#003049" font-size="12" font-weight="bold">$1.23B</text>
+<text x="800.0" y="785.5" fill="#005F73" font-size="19" font-weight="bold" text-anchor="end">18.7&#215;</text>
+<text x="820.0" y="537.0" fill="#003049" font-size="25" font-weight="bold">Top 10 domestic vs. top 10 international</text>
+<text x="820.0" y="563.0" fill="#6B7280" font-size="16">Top 10 each (U.S.-produced), shared scale.</text>
+<text x="1474.5" y="563.0" fill="#6B7280" font-size="14">Animation</text>
+<rect x="1456.5" y="551.0" width="12" height="12" fill="#BB3E03"/>
+<text x="1402.1" y="563.0" fill="#6B7280" font-size="14">Drama</text>
+<rect x="1384.1" y="551.0" width="12" height="12" fill="#EE9B00"/>
+<text x="1322.4" y="563.0" fill="#6B7280" font-size="14">Action</text>
+<rect x="1304.4" y="551.0" width="12" height="12" fill="#0A9396"/>
+<text x="1242.7" y="563.0" fill="#6B7280" font-size="14">Sci-Fi</text>
+<rect x="1224.7" y="551.0" width="12" height="12" fill="#003049"/>
+<text x="820.0" y="587.0" fill="#1F2937" font-size="13">Brand New Day</text>
+<rect x="940.0" y="577.0" width="78.03" height="13" fill="#003049" data-sec="genre" data-key="Spider-Man: Brand New Day" data-series="domestic" data-val="937441963" data-max="2138489059" data-track="178"/><!-- Spider-Man: Brand New Day domestic 937,441,963 / 2,138,489,059 x 178 -> 78.03 -->
+<text x="1023.0" y="587.0" fill="#003049" font-size="12" font-weight="bold">$937.4M</text>
+<text x="820.0" y="609.0" fill="#1F2937" font-size="13">Force Awakens</text>
+<rect x="940.0" y="599.0" width="77.96" height="13" fill="#003049" data-sec="genre" data-key="Star Wars: Episode VII - The Force Awakens" data-series="domestic" data-val="936662225" data-max="2138489059" data-track="178"/><!-- Star Wars: Episode VII - The Force Awakens domestic 936,662,225 / 2,138,489,059 x 178 -> 77.96 -->
+<text x="1023.0" y="609.0" fill="#003049" font-size="12" font-weight="bold">$936.7M</text>
+<text x="820.0" y="631.0" fill="#1F2937" font-size="13">Endgame</text>
+<rect x="940.0" y="621.0" width="71.45" height="13" fill="#003049" data-sec="genre" data-key="Avengers: Endgame" data-series="domestic" data-val="858373000" data-max="2138489059" data-track="178"/><!-- Avengers: Endgame domestic 858,373,000 / 2,138,489,059 x 178 -> 71.45 -->
+<text x="1016.4" y="631.0" fill="#003049" font-size="12" font-weight="bold">$858.4M</text>
+<text x="820.0" y="653.0" fill="#1F2937" font-size="13">No Way Home</text>
+<rect x="940.0" y="643.0" width="67.83" height="13" fill="#003049" data-sec="genre" data-key="Spider-Man: No Way Home" data-series="domestic" data-val="814866759" data-max="2138489059" data-track="178"/><!-- Spider-Man: No Way Home domestic 814,866,759 / 2,138,489,059 x 178 -> 67.83 -->
+<text x="1012.8" y="653.0" fill="#003049" font-size="12" font-weight="bold">$814.9M</text>
+<text x="820.0" y="675.0" fill="#1F2937" font-size="13">Avatar</text>
+<rect x="940.0" y="665.0" width="65.36" height="13" fill="#003049" data-sec="genre" data-key="Avatar" data-series="domestic" data-val="785221649" data-max="2138489059" data-track="178"/><!-- Avatar domestic 785,221,649 / 2,138,489,059 x 178 -> 65.36 -->
+<text x="1010.4" y="675.0" fill="#003049" font-size="12" font-weight="bold">$785.2M</text>
+<text x="820.0" y="697.0" fill="#1F2937" font-size="13">Top Gun: Maverick</text>
+<rect x="940.0" y="687.0" width="60.10" height="13" fill="#0A9396" data-sec="genre" data-key="Top Gun: Maverick" data-series="domestic" data-val="721996984" data-max="2138489059" data-track="178"/><!-- Top Gun: Maverick domestic 721,996,984 / 2,138,489,059 x 178 -> 60.10 -->
+<text x="1005.1" y="697.0" fill="#003049" font-size="12" font-weight="bold">$722.0M</text>
+<text x="820.0" y="719.0" fill="#1F2937" font-size="13">Black Panther</text>
+<rect x="940.0" y="709.0" width="58.30" height="13" fill="#003049" data-sec="genre" data-key="Black Panther" data-series="domestic" data-val="700426566" data-max="2138489059" data-track="178"/><!-- Black Panther domestic 700,426,566 / 2,138,489,059 x 178 -> 58.30 -->
+<text x="1003.3" y="719.0" fill="#003049" font-size="12" font-weight="bold">$700.4M</text>
+<text x="820.0" y="741.0" fill="#1F2937" font-size="13">Way of Water</text>
+<rect x="940.0" y="731.0" width="57.30" height="13" fill="#003049" data-sec="genre" data-key="Avatar: The Way of Water" data-series="domestic" data-val="688459501" data-max="2138489059" data-track="178"/><!-- Avatar: The Way of Water domestic 688,459,501 / 2,138,489,059 x 178 -> 57.30 -->
+<text x="1002.3" y="741.0" fill="#003049" font-size="12" font-weight="bold">$688.5M</text>
+<text x="820.0" y="763.0" fill="#1F2937" font-size="13">Infinity War</text>
+<rect x="940.0" y="753.0" width="56.50" height="13" fill="#003049" data-sec="genre" data-key="Avengers: Infinity War" data-series="domestic" data-val="678815482" data-max="2138489059" data-track="178"/><!-- Avengers: Infinity War domestic 678,815,482 / 2,138,489,059 x 178 -> 56.50 -->
+<text x="1001.5" y="763.0" fill="#003049" font-size="12" font-weight="bold">$678.8M</text>
+<text x="820.0" y="785.0" fill="#1F2937" font-size="13">Titanic</text>
+<rect x="940.0" y="775.0" width="56.13" height="13" fill="#EE9B00" data-sec="genre" data-key="Titanic" data-series="domestic" data-val="674354882" data-max="2138489059" data-track="178"/><!-- Titanic domestic 674,354,882 / 2,138,489,059 x 178 -> 56.13 -->
+<text x="1001.1" y="785.0" fill="#003049" font-size="12" font-weight="bold">$674.4M</text>
+<text x="1185.0" y="587.0" fill="#1F2937" font-size="13">Avatar</text>
+<rect x="1305.0" y="577.0" width="178.00" height="13" fill="#003049" data-sec="genre" data-key="Avatar" data-series="international" data-val="2138489059" data-max="2138489059" data-track="178"/><!-- Avatar international 2,138,489,059 / 2,138,489,059 x 178 -> 178.00 -->
+<text x="1488.0" y="587.0" fill="#003049" font-size="12" font-weight="bold">$2.14B</text>
+<text x="1185.0" y="609.0" fill="#1F2937" font-size="13">Endgame</text>
+<rect x="1305.0" y="599.0" width="161.57" height="13" fill="#003049" data-sec="genre" data-key="Avengers: Endgame" data-series="international" data-val="1941066100" data-max="2138489059" data-track="178"/><!-- Avengers: Endgame international 1,941,066,100 / 2,138,489,059 x 178 -> 161.57 -->
+<text x="1471.6" y="609.0" fill="#003049" font-size="12" font-weight="bold">$1.94B</text>
+<text x="1185.0" y="631.0" fill="#1F2937" font-size="13">Way of Water</text>
+<rect x="1305.0" y="621.0" width="137.01" height="13" fill="#003049" data-sec="genre" data-key="Avatar: The Way of Water" data-series="international" data-val="1646025119" data-max="2138489059" data-track="178"/><!-- Avatar: The Way of Water international 1,646,025,119 / 2,138,489,059 x 178 -> 137.01 -->
+<text x="1447.0" y="631.0" fill="#003049" font-size="12" font-weight="bold">$1.65B</text>
+<text x="1185.0" y="653.0" fill="#1F2937" font-size="13">Titanic</text>
+<rect x="1305.0" y="643.0" width="132.38" height="13" fill="#EE9B00" data-sec="genre" data-key="Titanic" data-series="international" data-val="1590458086" data-max="2138489059" data-track="178"/><!-- Titanic international 1,590,458,086 / 2,138,489,059 x 178 -> 132.38 -->
+<text x="1442.4" y="653.0" fill="#003049" font-size="12" font-weight="bold">$1.59B</text>
+<text x="1185.0" y="675.0" fill="#1F2937" font-size="13">Brand New Day</text>
+<rect x="1305.0" y="665.0" width="126.21" height="13" fill="#003049" data-sec="genre" data-key="Spider-Man: Brand New Day" data-series="international" data-val="1516250953" data-max="2138489059" data-track="178"/><!-- Spider-Man: Brand New Day international 1,516,250,953 / 2,138,489,059 x 178 -> 126.21 -->
+<text x="1436.2" y="675.0" fill="#003049" font-size="12" font-weight="bold">$1.52B</text>
+<text x="1185.0" y="697.0" fill="#1F2937" font-size="13">Zootopia 2</text>
+<rect x="1305.0" y="687.0" width="119.74" height="13" fill="#BB3E03" data-sec="genre" data-key="Zootopia 2" data-series="international" data-val="1438517790" data-max="2138489059" data-track="178"/><!-- Zootopia 2 international 1,438,517,790 / 2,138,489,059 x 178 -> 119.74 -->
+<text x="1429.7" y="697.0" fill="#003049" font-size="12" font-weight="bold">$1.44B</text>
+<text x="1185.0" y="719.0" fill="#1F2937" font-size="13">Infinity War</text>
+<rect x="1305.0" y="709.0" width="114.33" height="13" fill="#003049" data-sec="genre" data-key="Avengers: Infinity War" data-series="international" data-val="1373599557" data-max="2138489059" data-track="178"/><!-- Avengers: Infinity War international 1,373,599,557 / 2,138,489,059 x 178 -> 114.33 -->
+<text x="1424.3" y="719.0" fill="#003049" font-size="12" font-weight="bold">$1.37B</text>
+<text x="1185.0" y="741.0" fill="#1F2937" font-size="13">Furious 7</text>
+<rect x="1305.0" y="731.0" width="96.75" height="13" fill="#0A9396" data-sec="genre" data-key="Furious 7" data-series="international" data-val="1162335437" data-max="2138489059" data-track="178"/><!-- Furious 7 international 1,162,335,437 / 2,138,489,059 x 178 -> 96.75 -->
+<text x="1406.7" y="741.0" fill="#003049" font-size="12" font-weight="bold">$1.16B</text>
+<text x="1185.0" y="763.0" fill="#1F2937" font-size="13">Force Awakens</text>
+<rect x="1305.0" y="753.0" width="94.44" height="13" fill="#003049" data-sec="genre" data-key="Star Wars: Episode VII - The Force Awakens" data-series="international" data-val="1134647993" data-max="2138489059" data-track="178"/><!-- Star Wars: Episode VII - The Force Awakens international 1,134,647,993 / 2,138,489,059 x 178 -> 94.44 -->
+<text x="1404.4" y="763.0" fill="#003049" font-size="12" font-weight="bold">$1.13B</text>
+<text x="1185.0" y="785.0" fill="#1F2937" font-size="13">The Lion King</text>
+<rect x="1305.0" y="775.0" width="93.09" height="13" fill="#BB3E03" data-sec="genre" data-key="The Lion King" data-series="international" data-val="1118382776" data-max="2138489059" data-track="178"/><!-- The Lion King international 1,118,382,776 / 2,138,489,059 x 178 -> 93.09 -->
+<text x="1403.1" y="785.0" fill="#003049" font-size="12" font-weight="bold">$1.12B</text>
+<rect x="0" y="810" width="1600" height="90" fill="#003049"/>
+<text x="80.0" y="855.0" fill="#FFFFFF" font-size="24" font-weight="bold">@unwelcomedata</text>
+<text x="80.0" y="885.0" fill="#94D2BD" font-size="17">Source: Box Office Mojo; genre via TMDB &#183; retrieved 2026-09-18 &#183; nominal $ unless noted &#183; 2026 releases still in theaters</text>
+</svg>
